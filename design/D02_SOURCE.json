@@ -1,0 +1,10 @@
+{
+  "project": "合伙云 Pro",
+  "designVersion": "4.0.0-D02",
+  "sourceFile": "合伙云Pro_D02_大型平台级全量UI重构完整包_V4.0.0_20260817.zip",
+  "sourceDate": "2026-08-17",
+  "sha256": "B1F26BB0202F176C051EF778C2B61184EB66729FEC90153D2A02B498DA3D084E",
+  "pages": 184,
+  "states": 1153,
+  "repositoryPolicy": "Reference the versioned source package; do not commit all generated HTML and PNG files."
+}

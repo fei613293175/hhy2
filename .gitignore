@@ -1,0 +1,24 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+.gradle/
+**/build/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+
+# IDE and OS files
+.idea/
+.vscode/
+*.iml
+Thumbs.db
+
+# Large generated evidence; retain only intentional fixtures
+artifacts/
+screenshots/
