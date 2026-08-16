@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.hehuoyun.pro'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.hehuoyun.pro'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '3.1.0'
+
+        buildConfigField 'String', 'API_BASE_URL', '""'
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

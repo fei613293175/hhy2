@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Adapted from D02 assets/brand/hhy_d02_logo_mark.svg. -->
+    <path android:fillColor="#2F6BFF" android:pathData="M32,4L55,17.3L55,43.7L32,57L9,43.7L9,17.3z" />
+    <path android:fillColor="#07133A" android:fillAlpha="0.82" android:pathData="M32,11.2L48.8,21L48.8,40.4L32,50.2L15.2,40.4L15.2,21z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M32,24.6a6.1,6.1 0,1 0,0 12.2a6.1,6.1 0,1 0,0 -12.2z" />
+    <path android:fillColor="#8EB0FF" android:pathData="M20.5,20.9a3.3,3.3 0,1 0,0 6.6a3.3,3.3 0,1 0,0 -6.6z" />
+    <path android:fillColor="#54DED6" android:pathData="M43.5,20.9a3.3,3.3 0,1 0,0 6.6a3.3,3.3 0,1 0,0 -6.6z" />
+    <path android:fillColor="#F4D48E" android:pathData="M32,39.7a3.3,3.3 0,1 0,0 6.6a3.3,3.3 0,1 0,0 -6.6z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M24.4,25.2L26.1,24.2L29,26L28.8,28L24.4,25.2M39.6,25.2L35.2,28L35,26L37.9,24.2zM30.8,36.8L33.2,36.8L33.2,39L30.8,39z" />
+</vector>
