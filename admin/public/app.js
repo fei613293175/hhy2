@@ -15,7 +15,6 @@
     returnPage: "auth",
     returnState: "DEFAULT",
     canReturn: false,
-    selfDrawer: null,
     passwordFields: { current: "", next: "", confirm: "" }
   };
 
@@ -26,11 +25,19 @@
     const page = catalog[params.get("page")] ? params.get("page") : "auth";
     const requested = params.get("state");
     const state = catalog[page].states.includes(requested) ? requested : catalog[page].fallback;
-    return { page, state };
+    const requestedDrawer = params.get("drawer");
+    const drawer = page === "self" && ["password", "sessions"].includes(requestedDrawer)
+      ? requestedDrawer
+      : page === "self" && state === "SESSION_LIST"
+        ? "sessions"
+        : null;
+    return { page, state, drawer };
   }
 
-  function go(page, state, replace) {
-    const url = window.location.pathname + "?page=" + encodeURIComponent(page) + "&state=" + encodeURIComponent(state);
+  function go(page, state, replace, drawer) {
+    const params = new URLSearchParams({ page, state });
+    if (drawer) params.set("drawer", drawer);
+    const url = window.location.pathname + "?" + params.toString();
     window.history[replace ? "replaceState" : "pushState"]({ page, state }, "", url);
     render();
   }
@@ -69,7 +76,7 @@
     style(doc, ".hhy-toast{position:fixed;z-index:100;top:78px;right:26px;max-width:390px;min-height:38px;padding:10px 14px;display:flex;align-items:center;border:1px solid #cfe6ff;border-radius:13px;color:#1c68b2;background:#fff;box-shadow:0 8px 22px rgba(10,33,88,.10);font-size:12px;font-weight:650}.hhy-toast.error{border-color:#ffc8ce;color:#b82a3b}.hhy-toast.warn{border-color:#fbe2a8;color:#a76500}.hhy-toast.success{border-color:#c5f0de;color:#0f8055}button:not([disabled]){cursor:pointer}.hhy-native-input{display:block;width:100%;height:50px;padding:0 14px;border:1px solid #c5cbd6;border-radius:14px;background:#fff;color:#11182e;font:inherit;outline:none}.hhy-native-input:focus{border-color:#315ce8;box-shadow:0 0 0 3px rgba(49,92,232,.13)}.hhy-native-input::placeholder{color:#778197}.hhy-close-button{width:32px;height:32px;padding:0;border:0;border-radius:9px;background:transparent;color:#11182e}.hhy-close-button .hhy-icon{display:block;width:18px;height:18px;margin:auto}");
     if (current.page === "auth") bindAuth(doc, current.state);
     if (current.page === "captcha") bindCaptcha(doc, current.state);
-    if (current.page === "self") bindSelf(doc, current.state);
+    if (current.page === "self") bindSelf(doc, current);
   }
 
   function button(doc, text) {
@@ -229,7 +236,6 @@
       memory.returnPage = "self";
       memory.returnState = type === "password" ? "EDIT_PASSWORD" : "SESSION_LIST";
       memory.canReturn = true;
-      memory.selfDrawer = type;
       go("captcha", "DEFAULT");
     }));
     doc.body.append(backdrop, drawer);
@@ -266,10 +272,12 @@
     });
   }
 
-  function bindSelf(doc, state) {
+  function bindSelf(doc, current) {
+    const { state, drawer } = current;
     style(doc, selfStyle());
     doc.body.dataset.stateId = state;
     doc.querySelectorAll(".admin-drawer,.drawer-backdrop").forEach((item) => item.remove());
+    if (drawer) doc.querySelector(".state-ribbon")?.remove();
     const selected = doc.querySelector(".admin-menu-item.active span");
     if (selected) selected.textContent = "账号与安全";
     const content = doc.querySelector(".admin-body");
@@ -277,12 +285,12 @@
     content.innerHTML = selfMarkup();
     content.querySelectorAll(".hhy-action").forEach((item) => item.addEventListener("click", () => {
       const action = item.dataset.action;
-      memory.selfDrawer = action === "password" ? "password" : "sessions";
-      go("self", action === "password" ? "EDIT_PASSWORD" : "SESSION_LIST");
+      const nextDrawer = action === "password" ? "password" : "sessions";
+      go("self", action === "password" ? "EDIT_PASSWORD" : "SESSION_LIST", false, nextDrawer);
     }));
     bindSessionFilters(doc);
-    if (state === "EDIT_PASSWORD") openDrawer(doc, "password");
-    if (state === "SESSION_LIST") openDrawer(doc, "sessions");
+    if (drawer === "password") openDrawer(doc, "password");
+    if (drawer === "sessions") openDrawer(doc, "sessions");
   }
 
   window.addEventListener("popstate", render);
