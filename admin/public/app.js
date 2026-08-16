@@ -64,7 +64,7 @@
   function hydrate(frame, current) {
     const doc = frame.contentDocument;
     if (!doc) return;
-    style(doc, ".hhy-toast{position:fixed;z-index:100;top:78px;right:26px;max-width:390px;min-height:38px;padding:10px 14px;display:flex;align-items:center;border:1px solid #cfe6ff;border-radius:13px;color:#1c68b2;background:#fff;box-shadow:0 8px 22px rgba(10,33,88,.10);font-size:12px;font-weight:650}.hhy-toast.error{border-color:#ffc8ce;color:#b82a3b}.hhy-toast.warn{border-color:#fbe2a8;color:#a76500}.hhy-toast.success{border-color:#c5f0de;color:#0f8055}button:not([disabled]){cursor:pointer}");
+    style(doc, ".hhy-toast{position:fixed;z-index:100;top:78px;right:26px;max-width:390px;min-height:38px;padding:10px 14px;display:flex;align-items:center;border:1px solid #cfe6ff;border-radius:13px;color:#1c68b2;background:#fff;box-shadow:0 8px 22px rgba(10,33,88,.10);font-size:12px;font-weight:650}.hhy-toast.error{border-color:#ffc8ce;color:#b82a3b}.hhy-toast.warn{border-color:#fbe2a8;color:#a76500}.hhy-toast.success{border-color:#c5f0de;color:#0f8055}button:not([disabled]){cursor:pointer}.hhy-native-input{display:block;width:100%;height:50px;padding:0 14px;border:1px solid #c5cbd6;border-radius:14px;background:#fff;color:#11182e;font:inherit;outline:none}.hhy-native-input:focus{border-color:#315ce8;box-shadow:0 0 0 3px rgba(49,92,232,.13)}.hhy-native-input::placeholder{color:#778197}.hhy-close-button{width:32px;height:32px;padding:0;border:0;border-radius:9px;background:transparent;color:#11182e;font-size:25px;line-height:1}");
     if (current.page === "auth") bindAuth(doc, current.state);
     if (current.page === "captcha") bindCaptcha(doc, current.state);
     if (current.page === "self") bindSelf(doc, current.state);
@@ -74,15 +74,52 @@
     return [...doc.querySelectorAll("button")].find((item) => item.textContent.includes(text));
   }
 
+  function nativeInput(doc, target, options) {
+    if (!target) return null;
+    const input = doc.createElement("input");
+    input.className = "hhy-native-input";
+    input.type = options.type || "text";
+    input.name = options.name;
+    input.autocomplete = options.autocomplete || "off";
+    input.placeholder = options.placeholder || "";
+    input.value = options.value || "";
+    if (options.maxLength) input.maxLength = options.maxLength;
+    target.replaceWith(input);
+    return input;
+  }
+
+  function replaceCloseIcon(doc) {
+    const heading = [...doc.querySelectorAll("div")].find((item) => item.textContent.trim() === "安全验证");
+    const row = heading && heading.parentElement;
+    const icon = row && row.querySelector("svg.icon");
+    if (!icon) return null;
+    const close = doc.createElement("button");
+    close.type = "button";
+    close.className = "hhy-close-button";
+    close.setAttribute("aria-label", "关闭安全验证");
+    close.textContent = "×";
+    icon.replaceWith(close);
+    return close;
+  }
+
   function bindAuth(doc, state) {
-    const fields = [...doc.querySelectorAll("input")];
-    if (fields[0]) {
-      fields[0].value = memory.account;
-      fields[0].addEventListener("input", () => { memory.account = fields[0].value; });
+    const placeholders = [...doc.querySelectorAll(".login-panel .input")];
+    const account = nativeInput(doc, placeholders[0], {
+      name: "account",
+      value: memory.account,
+      autocomplete: "username"
+    });
+    const password = nativeInput(doc, placeholders[1], {
+      name: "password",
+      type: "password",
+      value: memory.password,
+      autocomplete: "current-password"
+    });
+    if (account) {
+      account.addEventListener("input", () => { memory.account = account.value; });
     }
-    if (fields[1]) {
-      fields[1].value = memory.password;
-      fields[1].addEventListener("input", () => { memory.password = fields[1].value; });
+    if (password) {
+      password.addEventListener("input", () => { memory.password = password.value; });
     }
     const login = button(doc, "登录管理后台");
     if (login) login.addEventListener("click", () => {
@@ -101,16 +138,21 @@
   }
 
   function bindCaptcha(doc, state) {
-    const fields = [...doc.querySelectorAll("input")];
-    const field = fields[fields.length - 1];
+    const placeholder = [...doc.querySelectorAll(".modal .input")].find((item) => item.textContent.includes("输入图中字符"));
+    const field = nativeInput(doc, placeholder, {
+      name: "captcha",
+      value: memory.captcha,
+      placeholder: "输入图中字符",
+      maxLength: 4,
+      autocomplete: "off"
+    });
     if (field) {
-      field.value = memory.captcha;
       field.addEventListener("input", () => { memory.captcha = field.value.toUpperCase(); });
       field.addEventListener("keydown", (event) => {
         if (event.key === "Escape") returnFromCaptcha();
       });
     }
-    const close = [...doc.querySelectorAll("button")].find((item) => item.textContent.trim() === "×");
+    const close = replaceCloseIcon(doc);
     if (close) close.addEventListener("click", returnFromCaptcha);
     const refresh = button(doc, "换一张");
     if (refresh) refresh.addEventListener("click", () => refreshCaptcha(doc, field));
