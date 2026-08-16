@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "design_version": "4.0.0-D02",
+  "purpose": "Resolves page-spec token aliases without changing the immutable D02 source package.",
+  "source": {
+    "package_sha256": "B1F26BB0202F176C051EF778C2B61184EB66729FEC90153D2A02B498DA3D084E",
+    "token_file": "DESIGN_TOKENS.json",
+    "css_file": "assets/css/hhy_d02_platform.css",
+    "css_sha256": "8e3b36e6b7843a336c083b2995d138fd875ecc2503c1342fecfd67c165316889"
+  },
+  "aliases": {
+    "color.neutral_50": "colors.neutral_50",
+    "color.info_100": "derived.colors.info_100",
+    "color.error_100": "derived.colors.error_100",
+    "typography.body_m": "derived.typography.body_m"
+  },
+  "derived": {
+    "colors": {
+      "info_500": "#2876E8",
+      "info_100": "#E8F1FF",
+      "error_100": "#FFE5E9"
+    },
+    "typography": {
+      "body_m": {
+        "size": 14,
+        "line_height": 22,
+        "weight": 430
+      }
+    }
+  },
+  "evidence": {
+    "info_500": "D02 CSS --info at the D02 global variable declaration",
+    "info_100": "D02 CSS --info-soft at the D02 global variable declaration",
+    "error_100": "D02 CSS --error-soft at the D02 global variable declaration",
+    "typography.body_m": "DESIGN_TOKENS.json typography.android_sp.body_m and typography.web_px.body_m declare the same values"
+  },
+  "rules": [
+    "Use aliases only while consuming D02 page specs.",
+    "Do not edit DESIGN_TOKENS.json inside the original ZIP.",
+    "Any new semantic token requires a versioned design-source update; it must not be invented by application code."
+  ]
+}

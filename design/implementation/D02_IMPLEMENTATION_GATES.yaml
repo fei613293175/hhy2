@@ -1,0 +1,54 @@
+schema_version: 1.0
+design_version: 4.0.0-D02
+source_package_sha256: B1F26BB0202F176C051EF778C2B61184EB66729FEC90153D2A02B498DA3D084E
+policy: >-
+  D02 is the visual and page-state source of truth. This file governs whether a
+  domain may move from visual implementation to an executable production flow.
+global_gates:
+  visual_artifact_integrity:
+    status: verified
+    evidence: scripts/audit_d02_package.py
+  token_consumption:
+    status: verified_with_derived_aliases
+    evidence: design/implementation/D02_DERIVED_TOKENS.json
+  api_contracts:
+    status: blocked
+  data_schema_and_migrations:
+    status: blocked
+  canonical_rbac_matrix:
+    status: blocked
+  observability_and_audit_event_schema:
+    status: blocked
+  android_ui_implementation:
+    status: blocked
+    required_stack: Kotlin + Jetpack Compose + Material 3 with D02 component styling
+    note: The existing Java/Canvas exploration slice does not satisfy the D02 Android implementation contract and must not be extended as the production baseline.
+domains:
+  bootstrap_and_release:
+    pages: [APP-SYS-001, APP-SYS-002, APP-SYS-003, ADMIN-APP-001, ADMIN-APP-002]
+    requires: [version-check API, maintenance-config API, signed-update metadata, download checksum policy]
+    status: blocked
+  authentication_and_identity:
+    pages: [APP-AUTH-001, APP-AUTH-002, APP-AUTH-003, APP-AUTH-004, APP-ID-001, APP-ID-002, APP-ID-003, APP-ID-004]
+    requires: [session lifecycle, password policy, captcha contract, email delivery contract, identity-provider contract, PII retention policy]
+    status: blocked
+  content_and_review:
+    pages: [APP-PUBLISH-001, APP-PUBLISH-002, APP-PUBLISH-003, APP-PUBLISH-004, APP-PUBLISH-005, APP-PUBLISH-006]
+    requires: [content schema, draft idempotency, upload protocol, review state machine, moderation rules, appeal contract]
+    status: blocked
+  commerce_and_wallet:
+    pages: [APP-ORDER-001, APP-ORDER-002, APP-PAY-001, APP-PAY-002, APP-PAY-003, APP-PAY-004, APP-WD-001, APP-WD-002, APP-WD-003]
+    requires: [money precision, order state machine, provider callback verification, idempotency keys, reconciliation policy, refund and withdrawal rules]
+    status: blocked
+  administration:
+    pages: [ADMIN-USER-001, ADMIN-CONTENT-001, ADMIN-OPS-001]
+    requires: [canonical roles, permission actions, data scope rules, export policy, sensitive-field masking rules, immutable audit log schema]
+    status: blocked
+release_normalization:
+  status: blocked
+  issue: Page metadata mixes slash-separated release sets and hyphenated ranges without a declared grammar.
+  required_output: A canonical release-wave manifest mapping every Page ID to an ordered release wave.
+acceptance:
+  visual: Every implemented state requires fixed-viewport diff at or below 2.0 percent, with critical geometry at or below 0.5 percent.
+  functional: A visual state is not a functional pass until its backing contract and real-device evidence exist.
+  security: No payment, identity, role-management, storage, or download workflow may simulate success when its server contract is absent.

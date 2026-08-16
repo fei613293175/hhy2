@@ -22,3 +22,4 @@ Thumbs.db
 # Large generated evidence; retain only intentional fixtures
 artifacts/
 screenshots/
+test-artifacts/

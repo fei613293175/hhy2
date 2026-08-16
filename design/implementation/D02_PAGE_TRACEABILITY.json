@@ -1,0 +1,5471 @@
+{
+  "schema_version": "1.0",
+  "design_version": "4.0.0-D02",
+  "source_package_sha256": "b1f26bb0202f176c051ef778c2b61184eb66729fec90153d2a02b498da3d084e",
+  "release_label_policy": "Raw D02 labels only; grammar remains unresolved.",
+  "pages": [
+    {
+      "page_id": "ADMIN-ANALYTICS-001",
+      "name_cn": "内容与流量分析",
+      "platform": "admin",
+      "module_id": "analytics",
+      "route": "/admin/analytics/content",
+      "release_label_raw": "R03/R07/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "NO_DATA",
+        "PARTIAL_DATA",
+        "EXPORTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "analytics"
+      ],
+      "database_tables": [
+        "content_daily_stats",
+        "red_packet_stats",
+        "daily_kpis"
+      ],
+      "roles_raw": [
+        "运营"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-APP-001",
+      "name_cn": "App版本列表与发布",
+      "platform": "admin",
+      "module_id": "app_release",
+      "route": "/admin/app/versions",
+      "release_label_raw": "R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "CREATE_DRAWER",
+        "UPLOADING",
+        "VERIFYING",
+        "PUBLISHING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "app_release",
+        "storage"
+      ],
+      "database_tables": [
+        "app_versions",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "发布权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-APP-002",
+      "name_cn": "App版本详情、下载与回滚",
+      "platform": "admin",
+      "module_id": "app_release",
+      "route": "/admin/app/versions/{id}",
+      "release_label_raw": "R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "DOWNLOADING",
+        "ROLLBACK_CONFIRM",
+        "PUBLISHING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "app_release"
+      ],
+      "database_tables": [
+        "app_versions",
+        "app_release_records",
+        "app_download_logs"
+      ],
+      "roles_raw": [
+        "发布/运维权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-APPEAL-001",
+      "name_cn": "内容申诉管理",
+      "platform": "admin",
+      "module_id": "governance",
+      "route": "/admin/governance/appeals",
+      "release_label_raw": "R03/R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "DECIDING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "governance"
+      ],
+      "database_tables": [
+        "content_appeals",
+        "content_reviews",
+        "content_status_logs"
+      ],
+      "roles_raw": [
+        "审核负责人"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-AUTH-001",
+      "name_cn": "管理后台登录页",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/login",
+      "release_label_raw": "P00",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "SUBMITTING",
+        "LOGIN_FAILED",
+        "RATE_LIMITED",
+        "ACCOUNT_LOCKED",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "admin_auth",
+        "captcha"
+      ],
+      "database_tables": [
+        "admin_users",
+        "admin_sessions",
+        "admin_login_logs"
+      ],
+      "roles_raw": [
+        "后台员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-CAPTCHA-001",
+      "name_cn": "图形验证码与匿名频控中心",
+      "platform": "admin",
+      "module_id": "security",
+      "route": "/admin/security/captcha",
+      "release_label_raw": "P00/R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "NO_DATA",
+        "EDITING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "captcha",
+        "rate_limit"
+      ],
+      "database_tables": [
+        "captcha_metrics",
+        "rate_limit_events",
+        "system_configs"
+      ],
+      "roles_raw": [
+        "安全/运维权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-CHAT-001",
+      "name_cn": "聊天举报列表",
+      "platform": "admin",
+      "module_id": "interaction",
+      "route": "/admin/chat/reports",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "chat_admin"
+      ],
+      "database_tables": [
+        "chat_reports",
+        "conversations"
+      ],
+      "roles_raw": [
+        "客服/审核"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-CHAT-002",
+      "name_cn": "聊天证据与处置详情",
+      "platform": "admin",
+      "module_id": "interaction",
+      "route": "/admin/chat/reports/{id}",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "MEDIA_RESTRICTED",
+        "DECIDING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "chat_admin",
+        "audit"
+      ],
+      "database_tables": [
+        "chat_reports",
+        "chat_messages",
+        "user_status_logs"
+      ],
+      "roles_raw": [
+        "客服/审核按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-CMS-001",
+      "name_cn": "平台公告管理",
+      "platform": "admin",
+      "module_id": "cms",
+      "route": "/admin/cms/announcements",
+      "release_label_raw": "R04/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "PREVIEW",
+        "SCHEDULED",
+        "PUBLISHED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "cms"
+      ],
+      "database_tables": [
+        "announcements",
+        "announcement_reads"
+      ],
+      "roles_raw": [
+        "运营"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-CMS-002",
+      "name_cn": "帮助、协议与规则管理",
+      "platform": "admin",
+      "module_id": "cms",
+      "route": "/admin/cms/articles",
+      "release_label_raw": "R01-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "PREVIEW",
+        "VERSION_HISTORY",
+        "PUBLISHED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "cms"
+      ],
+      "database_tables": [
+        "cms_articles",
+        "agreements",
+        "agreement_versions",
+        "agreement_acceptances"
+      ],
+      "roles_raw": [
+        "运营/合规"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-CONTENT-001",
+      "name_cn": "四类内容统一列表",
+      "platform": "admin",
+      "module_id": "content",
+      "route": "/admin/contents",
+      "release_label_raw": "R02/R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "BULK_ACTION",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_content"
+      ],
+      "database_tables": [
+        "contents",
+        "content_stats",
+        "content_reviews"
+      ],
+      "roles_raw": [
+        "运营/审核/客服"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-CONTENT-002",
+      "name_cn": "内容全景详情",
+      "platform": "admin",
+      "module_id": "content",
+      "route": "/admin/contents/{id}",
+      "release_label_raw": "R02/R03/R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "PARTIAL_PERMISSION",
+        "NOT_FOUND",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_content"
+      ],
+      "database_tables": [
+        "contents",
+        "content_versions",
+        "content_media",
+        "content_contacts"
+      ],
+      "roles_raw": [
+        "运营/审核/客服"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-DASH-001",
+      "name_cn": "运营数据总览",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin",
+      "release_label_raw": "R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "PARTIAL_DATA",
+        "EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "dashboard",
+        "analytics",
+        "health"
+      ],
+      "database_tables": [
+        "daily_kpis",
+        "system_health_snapshots",
+        "job_execution_logs"
+      ],
+      "roles_raw": [
+        "有总览权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-DICT-001",
+      "name_cn": "分类、标签与业务字典",
+      "platform": "admin",
+      "module_id": "content",
+      "route": "/admin/content/dictionaries",
+      "release_label_raw": "R02/R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "IN_USE",
+        "VERSION_CONFLICT",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content",
+        "config"
+      ],
+      "database_tables": [
+        "content_categories",
+        "content_tags",
+        "system_dictionaries"
+      ],
+      "roles_raw": [
+        "运营配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-EMAIL-001",
+      "name_cn": "企业邮箱配置与健康",
+      "platform": "admin",
+      "module_id": "email",
+      "route": "/admin/integrations/email",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "READY",
+        "TESTING",
+        "HEALTHY",
+        "UNHEALTHY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "email",
+        "health"
+      ],
+      "database_tables": [
+        "provider_health_logs",
+        "system_configs"
+      ],
+      "roles_raw": [
+        "超级管理员/运维"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-EMAIL-002",
+      "name_cn": "邮件发送日志",
+      "platform": "admin",
+      "module_id": "email",
+      "route": "/admin/email/logs",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "RETRYING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "email"
+      ],
+      "database_tables": [
+        "email_send_logs",
+        "email_delivery_attempts"
+      ],
+      "roles_raw": [
+        "客服/运维"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-EMAIL-003",
+      "name_cn": "邮件模板管理",
+      "platform": "admin",
+      "module_id": "email",
+      "route": "/admin/email/templates",
+      "release_label_raw": "R01/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "PREVIEW",
+        "TESTING",
+        "VALIDATION_ERROR",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "email",
+        "cms"
+      ],
+      "database_tables": [
+        "email_templates",
+        "email_template_versions"
+      ],
+      "roles_raw": [
+        "运营/配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-FEED-001",
+      "name_cn": "首页信息流与搜索运营配置",
+      "platform": "admin",
+      "module_id": "content",
+      "route": "/admin/content/discovery",
+      "release_label_raw": "R02/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EDITING",
+        "PREVIEW",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "home",
+        "search",
+        "config"
+      ],
+      "database_tables": [
+        "home_configs",
+        "hot_search_terms",
+        "system_configs"
+      ],
+      "roles_raw": [
+        "运营配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-GROWTH-001",
+      "name_cn": "直推活跃规则与档位矩阵",
+      "platform": "admin",
+      "module_id": "growth",
+      "route": "/admin/growth/activity-rules",
+      "release_label_raw": "R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EDITING",
+        "SIMULATING",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "growth_admin"
+      ],
+      "database_tables": [
+        "referral_activity_rules",
+        "referral_milestones",
+        "referral_reward_matrix"
+      ],
+      "roles_raw": [
+        "增长配置/财务"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-GROWTH-002",
+      "name_cn": "直推活跃进度与奖励",
+      "platform": "admin",
+      "module_id": "growth",
+      "route": "/admin/growth/activity-progress",
+      "release_label_raw": "R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "growth_admin"
+      ],
+      "database_tables": [
+        "referral_activity_progress",
+        "referral_activity_events",
+        "referral_milestone_rewards"
+      ],
+      "roles_raw": [
+        "增长运营/客服/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-H5-001",
+      "name_cn": "H5页面与下载配置",
+      "platform": "admin",
+      "module_id": "cms",
+      "route": "/admin/cms/h5-pages",
+      "release_label_raw": "R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "PREVIEW",
+        "VALIDATION_ERROR",
+        "PUBLISHED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "cms",
+        "h5"
+      ],
+      "database_tables": [
+        "h5_page_configs",
+        "h5_redirect_rules"
+      ],
+      "roles_raw": [
+        "运营配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-ID-001",
+      "name_cn": "实名认证配置",
+      "platform": "admin",
+      "module_id": "identity",
+      "route": "/admin/identity/config",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EDITING",
+        "VALIDATION_ERROR",
+        "TESTING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "identity",
+        "config"
+      ],
+      "database_tables": [
+        "identity_config",
+        "system_config_versions"
+      ],
+      "roles_raw": [
+        "超级管理员/实名运营"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-ID-002",
+      "name_cn": "实名认证列表",
+      "platform": "admin",
+      "module_id": "identity",
+      "route": "/admin/identity/sessions",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "EXPORTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "identity"
+      ],
+      "database_tables": [
+        "identity_sessions",
+        "identity_results",
+        "identity_profiles"
+      ],
+      "roles_raw": [
+        "实名审核/客服/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-ID-003",
+      "name_cn": "实名认证详情",
+      "platform": "admin",
+      "module_id": "identity",
+      "route": "/admin/identity/sessions/{id}",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "MEDIA_RESTRICTED",
+        "NOT_FOUND",
+        "ERROR"
+      ],
+      "api_groups": [
+        "identity"
+      ],
+      "database_tables": [
+        "identity_sessions",
+        "identity_captures",
+        "identity_provider_requests",
+        "identity_results"
+      ],
+      "roles_raw": [
+        "实名审核/风控按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-ID-004",
+      "name_cn": "实名认证人工复核",
+      "platform": "admin",
+      "module_id": "identity",
+      "route": "/admin/identity/sessions/{id}/review",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "READY",
+        "MEDIA_LOADING",
+        "DECIDING",
+        "VERSION_CONFLICT",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "identity",
+        "audit"
+      ],
+      "database_tables": [
+        "identity_manual_actions",
+        "identity_results",
+        "sensitive_data_access_logs"
+      ],
+      "roles_raw": [
+        "实名审核权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-ID-005",
+      "name_cn": "实名供应商调用与健康",
+      "platform": "admin",
+      "module_id": "identity",
+      "route": "/admin/identity/provider-logs",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "TESTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "identity",
+        "health"
+      ],
+      "database_tables": [
+        "identity_provider_requests",
+        "provider_health_logs"
+      ],
+      "roles_raw": [
+        "运维/实名管理员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-ID-006",
+      "name_cn": "实名敏感媒体访问审计",
+      "platform": "admin",
+      "module_id": "identity",
+      "route": "/admin/identity/access-logs",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "audit"
+      ],
+      "database_tables": [
+        "sensitive_data_access_logs"
+      ],
+      "roles_raw": [
+        "审计/合规权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-INVALID-001",
+      "name_cn": "失效链接与群信息反馈",
+      "platform": "admin",
+      "module_id": "governance",
+      "route": "/admin/governance/invalid-feedback",
+      "release_label_raw": "R03/R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "DECIDING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "governance"
+      ],
+      "database_tables": [
+        "content_invalid_feedback",
+        "contents",
+        "notifications"
+      ],
+      "roles_raw": [
+        "运营/审核"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-MEMBER-001",
+      "name_cn": "Pro会员计划与权益",
+      "platform": "admin",
+      "module_id": "membership",
+      "route": "/admin/membership/plans",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EDITING",
+        "VALIDATION_ERROR",
+        "PREVIEW",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "membership",
+        "product"
+      ],
+      "database_tables": [
+        "membership_plans",
+        "membership_skus",
+        "membership_benefits"
+      ],
+      "roles_raw": [
+        "会员配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-MEMBER-002",
+      "name_cn": "用户会员列表与详情",
+      "platform": "admin",
+      "module_id": "membership",
+      "route": "/admin/membership/users",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "membership_admin"
+      ],
+      "database_tables": [
+        "user_memberships",
+        "membership_snapshots"
+      ],
+      "roles_raw": [
+        "客服/运营"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-MEMBER-003",
+      "name_cn": "会员赠送与受控调整",
+      "platform": "admin",
+      "module_id": "membership",
+      "route": "/admin/membership/adjustments",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "CREATE_DRAWER",
+        "IMPACT_CHECK",
+        "PROCESSING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "membership_admin"
+      ],
+      "database_tables": [
+        "membership_adjustments",
+        "user_memberships",
+        "admin_operation_logs"
+      ],
+      "roles_raw": [
+        "运营负责人/超级管理员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-NOTIFY-001",
+      "name_cn": "系统提醒模板",
+      "platform": "admin",
+      "module_id": "interaction",
+      "route": "/admin/notifications/templates",
+      "release_label_raw": "R04/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "PREVIEW",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "notification",
+        "cms"
+      ],
+      "database_tables": [
+        "notification_templates",
+        "notification_template_versions"
+      ],
+      "roles_raw": [
+        "运营配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-NOTIFY-002",
+      "name_cn": "系统提醒发送与失败日志",
+      "platform": "admin",
+      "module_id": "interaction",
+      "route": "/admin/notifications/logs",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "RETRYING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "notification"
+      ],
+      "database_tables": [
+        "notifications",
+        "notification_deliveries"
+      ],
+      "roles_raw": [
+        "客服/运维"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-OPS-001",
+      "name_cn": "运行健康、迁移与备份",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/system/operations",
+      "release_label_raw": "P00/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "HEALTHY",
+        "DEGRADED",
+        "UNHEALTHY",
+        "BACKUP_RUNNING",
+        "MIGRATION_PENDING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "health",
+        "backup"
+      ],
+      "database_tables": [
+        "system_health_snapshots",
+        "database_migrations",
+        "backup_records"
+      ],
+      "roles_raw": [
+        "运维权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-ORDER-001",
+      "name_cn": "业务订单列表",
+      "platform": "admin",
+      "module_id": "transaction",
+      "route": "/admin/commerce/orders",
+      "release_label_raw": "R05-R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "EXPORTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "order_admin"
+      ],
+      "database_tables": [
+        "payment_business_orders"
+      ],
+      "roles_raw": [
+        "客服/财务/运营按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-ORDER-002",
+      "name_cn": "业务订单详情",
+      "platform": "admin",
+      "module_id": "transaction",
+      "route": "/admin/commerce/orders/{outTradeNo}",
+      "release_label_raw": "R05-R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "QUERYING",
+        "CORRECTION_PENDING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "order_admin",
+        "payment"
+      ],
+      "database_tables": [
+        "payment_business_orders",
+        "payment_attempts",
+        "payment_events",
+        "entitlement_grants"
+      ],
+      "roles_raw": [
+        "客服/财务/运营按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PAY-001",
+      "name_cn": "支付交易列表",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/transactions",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment_admin"
+      ],
+      "database_tables": [
+        "payment_attempts",
+        "manual_payment_submissions"
+      ],
+      "roles_raw": [
+        "财务/客服"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PAY-002",
+      "name_cn": "支付交易详情",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/transactions/{id}",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "QUERYING",
+        "PAID",
+        "PENDING",
+        "FAILED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment_admin"
+      ],
+      "database_tables": [
+        "payment_attempts",
+        "payment_events",
+        "payment_provider_logs"
+      ],
+      "roles_raw": [
+        "财务/客服按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PAY-003",
+      "name_cn": "支付方式与订单类型可见性",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/methods",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment",
+        "config"
+      ],
+      "database_tables": [
+        "payment_method_configs"
+      ],
+      "roles_raw": [
+        "支付配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PAY-004",
+      "name_cn": "支付回调与主动查单日志",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/provider-logs",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "RETRYING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment_admin"
+      ],
+      "database_tables": [
+        "payment_provider_logs",
+        "payment_events"
+      ],
+      "roles_raw": [
+        "财务/运维"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PAY-005",
+      "name_cn": "支付对账与异常账务",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/reconciliation",
+      "release_label_raw": "R05/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "NO_DIFF",
+        "DETAIL",
+        "RUNNING",
+        "RESOLVING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment_admin"
+      ],
+      "database_tables": [
+        "payment_reconciliation_records",
+        "payment_exceptions"
+      ],
+      "roles_raw": [
+        "财务"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PAY-006",
+      "name_cn": "受控退款、撤销与冲正",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/corrections",
+      "release_label_raw": "R05/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "DETAIL",
+        "IMPACT_CHECK",
+        "CONFIRMING",
+        "PROCESSING",
+        "SUCCESS",
+        "FAILED"
+      ],
+      "api_groups": [
+        "payment_admin",
+        "wallet"
+      ],
+      "database_tables": [
+        "payment_corrections",
+        "reward_ledger",
+        "commission_records",
+        "entitlement_grants"
+      ],
+      "roles_raw": [
+        "财务负责人/超级管理员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PRODUCT-001",
+      "name_cn": "商品与SKU列表",
+      "platform": "admin",
+      "module_id": "transaction",
+      "route": "/admin/commerce/products",
+      "release_label_raw": "R05/R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "EDIT_DRAWER",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "product"
+      ],
+      "database_tables": [
+        "products",
+        "product_skus"
+      ],
+      "roles_raw": [
+        "商品配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PRODUCT-002",
+      "name_cn": "商品权益与规则详情",
+      "platform": "admin",
+      "module_id": "transaction",
+      "route": "/admin/commerce/products/{id}",
+      "release_label_raw": "R05/R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EDITING",
+        "QUOTE_TEST",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "product"
+      ],
+      "database_tables": [
+        "products",
+        "product_skus",
+        "product_entitlements",
+        "commission_policies"
+      ],
+      "roles_raw": [
+        "商品配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PROP-001",
+      "name_cn": "道具定义与SKU",
+      "platform": "admin",
+      "module_id": "prop",
+      "route": "/admin/props/definitions",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EDITING",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "prop",
+        "product"
+      ],
+      "database_tables": [
+        "prop_definitions",
+        "prop_skus"
+      ],
+      "roles_raw": [
+        "道具配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PROP-002",
+      "name_cn": "用户道具库存",
+      "platform": "admin",
+      "module_id": "prop",
+      "route": "/admin/props/user-inventory",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ADJUSTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "prop_admin"
+      ],
+      "database_tables": [
+        "user_props",
+        "prop_execution_logs"
+      ],
+      "roles_raw": [
+        "客服/运营"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PROP-003",
+      "name_cn": "内容曝光权益",
+      "platform": "admin",
+      "module_id": "prop",
+      "route": "/admin/props/entitlements",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "TERMINATING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "prop_admin"
+      ],
+      "database_tables": [
+        "content_entitlements",
+        "contents"
+      ],
+      "roles_raw": [
+        "运营"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PROP-004",
+      "name_cn": "道具执行、资源位与异常",
+      "platform": "admin",
+      "module_id": "prop",
+      "route": "/admin/props/executions",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "RESOURCE_STATUS",
+        "DETAIL",
+        "RETRYING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "prop_admin"
+      ],
+      "database_tables": [
+        "prop_execution_logs",
+        "headline_slots",
+        "color_themes"
+      ],
+      "roles_raw": [
+        "运营/运维"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-PUBLISHER-001",
+      "name_cn": "发布者管理",
+      "platform": "admin",
+      "module_id": "content",
+      "route": "/admin/publishers",
+      "release_label_raw": "R02/R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_content"
+      ],
+      "database_tables": [
+        "users",
+        "user_profiles",
+        "contents",
+        "user_memberships"
+      ],
+      "roles_raw": [
+        "运营/客服"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-QR-001",
+      "name_cn": "人工扫码方式配置",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/manual-qr/methods",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment",
+        "config"
+      ],
+      "database_tables": [
+        "payment_method_configs"
+      ],
+      "roles_raw": [
+        "支付配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-QR-002",
+      "name_cn": "收款二维码资产管理",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/manual-qr/codes",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "UPLOADING",
+        "PREVIEW",
+        "DISABLE_CONFIRM",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment",
+        "storage"
+      ],
+      "database_tables": [
+        "payment_qr_codes",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "支付配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-QR-003",
+      "name_cn": "人工付款审核列表",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/manual-submissions",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment_admin"
+      ],
+      "database_tables": [
+        "manual_payment_submissions",
+        "payment_business_orders"
+      ],
+      "roles_raw": [
+        "支付审核/财务"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-QR-004",
+      "name_cn": "人工付款审核详情",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/payments/manual-submissions/{id}",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "SCREENSHOT_LOADING",
+        "APPROVING",
+        "REJECTING",
+        "VERSION_CONFLICT",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment_admin",
+        "audit"
+      ],
+      "database_tables": [
+        "manual_payment_submissions",
+        "payment_events",
+        "entitlement_grants",
+        "commission_records"
+      ],
+      "roles_raw": [
+        "支付审核/财务"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-REF-001",
+      "name_cn": "邀请关系管理",
+      "platform": "admin",
+      "module_id": "growth",
+      "route": "/admin/growth/referrals",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ADJUSTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral_admin"
+      ],
+      "database_tables": [
+        "invite_codes",
+        "referral_relations",
+        "referral_binding_logs"
+      ],
+      "roles_raw": [
+        "运营/客服/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-REF-002",
+      "name_cn": "消费佣金策略",
+      "platform": "admin",
+      "module_id": "growth",
+      "route": "/admin/growth/commission-policies",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "TEST_CALC",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral_admin"
+      ],
+      "database_tables": [
+        "commission_policies",
+        "product_skus"
+      ],
+      "roles_raw": [
+        "增长配置/财务"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-REF-003",
+      "name_cn": "消费佣金记录",
+      "platform": "admin",
+      "module_id": "growth",
+      "route": "/admin/growth/commissions",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral_admin"
+      ],
+      "database_tables": [
+        "commission_records",
+        "reward_ledger"
+      ],
+      "roles_raw": [
+        "财务/客服/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-REF-004",
+      "name_cn": "推广素材管理",
+      "platform": "admin",
+      "module_id": "growth",
+      "route": "/admin/growth/materials",
+      "release_label_raw": "R08/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "PREVIEW",
+        "RENDER_TEST",
+        "PUBLISHED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral_admin",
+        "cms"
+      ],
+      "database_tables": [
+        "referral_materials",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "运营"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-REPORT-001",
+      "name_cn": "内容举报管理",
+      "platform": "admin",
+      "module_id": "governance",
+      "route": "/admin/governance/reports",
+      "release_label_raw": "R03/R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "DECIDING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "governance"
+      ],
+      "database_tables": [
+        "content_reports",
+        "content_status_logs",
+        "notifications"
+      ],
+      "roles_raw": [
+        "审核/客服"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-REVIEW-001",
+      "name_cn": "内容审核队列",
+      "platform": "admin",
+      "module_id": "governance",
+      "route": "/admin/reviews",
+      "release_label_raw": "R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "ASSIGNING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "review"
+      ],
+      "database_tables": [
+        "content_reviews",
+        "contents"
+      ],
+      "roles_raw": [
+        "审核员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-REVIEW-002",
+      "name_cn": "内容审核详情",
+      "platform": "admin",
+      "module_id": "governance",
+      "route": "/admin/reviews/{id}",
+      "release_label_raw": "R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "DECIDING",
+        "VERSION_CONFLICT",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "review"
+      ],
+      "database_tables": [
+        "content_reviews",
+        "content_versions",
+        "content_status_logs"
+      ],
+      "roles_raw": [
+        "审核员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-RISK-001",
+      "name_cn": "风险事件中心",
+      "platform": "admin",
+      "module_id": "risk",
+      "route": "/admin/risk/events",
+      "release_label_raw": "R07-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "DECIDING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "risk"
+      ],
+      "database_tables": [
+        "risk_events",
+        "manual_review_cases"
+      ],
+      "roles_raw": [
+        "风控权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-RISK-002",
+      "name_cn": "黑白名单管理",
+      "platform": "admin",
+      "module_id": "risk",
+      "route": "/admin/risk/lists",
+      "release_label_raw": "R07-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "CREATE_DRAWER",
+        "DETAIL",
+        "DISABLE_CONFIRM",
+        "ERROR"
+      ],
+      "api_groups": [
+        "risk"
+      ],
+      "database_tables": [
+        "blacklists",
+        "whitelists"
+      ],
+      "roles_raw": [
+        "风控权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-RP-001",
+      "name_cn": "红包业务配置",
+      "platform": "admin",
+      "module_id": "redpacket",
+      "route": "/admin/red-packets/config",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EDITING",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket",
+        "config"
+      ],
+      "database_tables": [
+        "system_configs",
+        "system_config_versions"
+      ],
+      "roles_raw": [
+        "红包运营/配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-RP-002",
+      "name_cn": "红包活动列表",
+      "platform": "admin",
+      "module_id": "redpacket",
+      "route": "/admin/red-packets/campaigns",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "EXPORTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket_admin"
+      ],
+      "database_tables": [
+        "red_packet_campaigns",
+        "red_packet_stats"
+      ],
+      "roles_raw": [
+        "红包运营/客服/财务"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-RP-003",
+      "name_cn": "红包活动详情",
+      "platform": "admin",
+      "module_id": "redpacket",
+      "route": "/admin/red-packets/campaigns/{id}",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "PAUSED",
+        "SOLD_OUT",
+        "CLOSED",
+        "PLATFORM_STOPPED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket_admin"
+      ],
+      "database_tables": [
+        "red_packet_campaigns",
+        "red_packet_batches",
+        "red_packet_claims",
+        "red_packet_ledger"
+      ],
+      "roles_raw": [
+        "红包运营/客服/财务按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-RP-004",
+      "name_cn": "红包投放批次详情",
+      "platform": "admin",
+      "module_id": "redpacket",
+      "route": "/admin/red-packets/batches/{id}",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "PAYMENT_PENDING",
+        "ACTIVE",
+        "SOLD_OUT",
+        "CLOSED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket_admin"
+      ],
+      "database_tables": [
+        "red_packet_batches",
+        "red_packet_quotes",
+        "payment_business_orders"
+      ],
+      "roles_raw": [
+        "红包运营/财务"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-RP-005",
+      "name_cn": "红包领取记录",
+      "platform": "admin",
+      "module_id": "redpacket",
+      "route": "/admin/red-packets/claims",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket_admin"
+      ],
+      "database_tables": [
+        "red_packet_claims",
+        "red_packet_view_sessions",
+        "reward_ledger"
+      ],
+      "roles_raw": [
+        "红包运营/客服/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-RP-006",
+      "name_cn": "红包资金账本与数据",
+      "platform": "admin",
+      "module_id": "redpacket",
+      "route": "/admin/red-packets/ledger",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "NO_DATA",
+        "DETAIL",
+        "DIFF_WARNING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket_admin",
+        "analytics"
+      ],
+      "database_tables": [
+        "red_packet_ledger",
+        "red_packet_stats"
+      ],
+      "roles_raw": [
+        "财务/运营"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SEC-001",
+      "name_cn": "后台图形安全验证码弹窗",
+      "platform": "admin",
+      "module_id": "security",
+      "route": "dialog://admin-captcha",
+      "release_label_raw": "P00",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "DEFAULT",
+        "VERIFYING",
+        "WRONG",
+        "EXPIRED",
+        "RATE_LIMITED",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "captcha"
+      ],
+      "database_tables": [
+        "captcha_challenges",
+        "captcha_tickets"
+      ],
+      "roles_raw": [
+        "后台员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SELF-001",
+      "name_cn": "后台个人账号与安全",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/me",
+      "release_label_raw": "P00",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "EDIT_PASSWORD",
+        "SESSION_LIST",
+        "SUBMITTING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_auth",
+        "captcha"
+      ],
+      "database_tables": [
+        "admin_users",
+        "admin_sessions",
+        "admin_login_logs"
+      ],
+      "roles_raw": [
+        "后台员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-STORAGE-001",
+      "name_cn": "Cloudflare R2配置与健康",
+      "platform": "admin",
+      "module_id": "storage",
+      "route": "/admin/integrations/storage",
+      "release_label_raw": "P00/R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "TESTING",
+        "HEALTHY",
+        "UNHEALTHY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "storage",
+        "health"
+      ],
+      "database_tables": [
+        "provider_health_logs",
+        "system_configs"
+      ],
+      "roles_raw": [
+        "超级管理员/运维"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-STORAGE-002",
+      "name_cn": "文件对象管理",
+      "platform": "admin",
+      "module_id": "storage",
+      "route": "/admin/storage/files",
+      "release_label_raw": "R01-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "PREVIEW",
+        "DELETE_CONFIRM",
+        "ERROR"
+      ],
+      "api_groups": [
+        "storage"
+      ],
+      "database_tables": [
+        "file_objects",
+        "file_bindings",
+        "file_access_logs"
+      ],
+      "roles_raw": [
+        "运营/客服/审计按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-STORAGE-003",
+      "name_cn": "孤立文件清理与删除日志",
+      "platform": "admin",
+      "module_id": "storage",
+      "route": "/admin/storage/cleanup",
+      "release_label_raw": "R01/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "RUNNING",
+        "RESULT",
+        "FAILED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "storage",
+        "scheduler"
+      ],
+      "database_tables": [
+        "file_objects",
+        "file_cleanup_jobs",
+        "file_delete_logs"
+      ],
+      "roles_raw": [
+        "运维权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SUPPORT-001",
+      "name_cn": "客服工单列表",
+      "platform": "admin",
+      "module_id": "support",
+      "route": "/admin/support/tickets",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "ASSIGNING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "support_admin"
+      ],
+      "database_tables": [
+        "support_tickets"
+      ],
+      "roles_raw": [
+        "客服/主管"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SUPPORT-002",
+      "name_cn": "客服工单详情",
+      "platform": "admin",
+      "module_id": "support",
+      "route": "/admin/support/tickets/{id}",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "REPLYING",
+        "UPLOADING",
+        "TRANSFERRING",
+        "CLOSED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "support_admin",
+        "storage"
+      ],
+      "database_tables": [
+        "support_tickets",
+        "ticket_messages",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "客服/主管"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SYS-001",
+      "name_cn": "后台账号管理",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/system/users",
+      "release_label_raw": "P00/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "CREATE_DRAWER",
+        "EDIT_DRAWER",
+        "CONFIRM_DISABLED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_rbac"
+      ],
+      "database_tables": [
+        "admin_users",
+        "admin_user_roles",
+        "admin_sessions"
+      ],
+      "roles_raw": [
+        "超级管理员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SYS-002",
+      "name_cn": "角色与权限管理",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/system/roles",
+      "release_label_raw": "P00/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "ROLE_DETAIL",
+        "EDITING",
+        "VERSION_CONFLICT",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_rbac"
+      ],
+      "database_tables": [
+        "admin_roles",
+        "admin_permissions",
+        "admin_role_permissions"
+      ],
+      "roles_raw": [
+        "超级管理员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SYS-003",
+      "name_cn": "后台操作审计",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/system/audit-logs",
+      "release_label_raw": "P00/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "EXPORTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "audit"
+      ],
+      "database_tables": [
+        "admin_operation_logs",
+        "sensitive_data_access_logs"
+      ],
+      "roles_raw": [
+        "审计权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SYS-004",
+      "name_cn": "运行配置中心",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/system/configs",
+      "release_label_raw": "P00-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "GROUP_LIST",
+        "EDITING",
+        "VALIDATION_ERROR",
+        "HISTORY",
+        "ROLLBACK_CONFIRM",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "config"
+      ],
+      "database_tables": [
+        "system_configs",
+        "system_config_versions"
+      ],
+      "roles_raw": [
+        "配置权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SYS-005",
+      "name_cn": "维护与紧急开关",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/system/switches",
+      "release_label_raw": "P00-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "CONFIRMING",
+        "APPLYING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "config"
+      ],
+      "database_tables": [
+        "feature_flags",
+        "system_config_versions",
+        "admin_operation_logs"
+      ],
+      "roles_raw": [
+        "超级管理员/运营负责人"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-SYS-006",
+      "name_cn": "定时任务与重跑",
+      "platform": "admin",
+      "module_id": "system",
+      "route": "/admin/system/jobs",
+      "release_label_raw": "R07-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "DETAIL",
+        "RUNNING",
+        "SUCCESS",
+        "FAILED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "scheduler"
+      ],
+      "database_tables": [
+        "job_definitions",
+        "job_execution_logs"
+      ],
+      "roles_raw": [
+        "运维权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-TASK-001",
+      "name_cn": "个人任务定义",
+      "platform": "admin",
+      "module_id": "task",
+      "route": "/admin/tasks/definitions",
+      "release_label_raw": "R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EDITING",
+        "PREVIEW",
+        "VALIDATION_ERROR",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "task_admin"
+      ],
+      "database_tables": [
+        "task_definitions",
+        "task_rule_versions"
+      ],
+      "roles_raw": [
+        "增长配置"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-TASK-002",
+      "name_cn": "任务进度、奖励与预算",
+      "platform": "admin",
+      "module_id": "task",
+      "route": "/admin/tasks/operations",
+      "release_label_raw": "R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "BUDGET_WARNING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "task_admin"
+      ],
+      "database_tables": [
+        "user_task_progress",
+        "reward_grants",
+        "growth_budgets"
+      ],
+      "roles_raw": [
+        "增长运营/财务/客服"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-USER-001",
+      "name_cn": "用户列表",
+      "platform": "admin",
+      "module_id": "account",
+      "route": "/admin/users",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "EXPORTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_users"
+      ],
+      "database_tables": [
+        "users",
+        "user_profiles",
+        "identity_profiles",
+        "user_memberships"
+      ],
+      "roles_raw": [
+        "客服/运营/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-USER-002",
+      "name_cn": "用户全景详情",
+      "platform": "admin",
+      "module_id": "account",
+      "route": "/admin/users/{id}",
+      "release_label_raw": "R01-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "PARTIAL_PERMISSION",
+        "NOT_FOUND",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_users"
+      ],
+      "database_tables": [
+        "users",
+        "user_profiles",
+        "user_status_logs"
+      ],
+      "roles_raw": [
+        "客服/运营/风控/财务按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-USER-003",
+      "name_cn": "用户设备与会话",
+      "platform": "admin",
+      "module_id": "account",
+      "route": "/admin/users/{id}/sessions",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "REVOKING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_users"
+      ],
+      "database_tables": [
+        "user_sessions",
+        "user_devices",
+        "login_logs"
+      ],
+      "roles_raw": [
+        "客服/安全权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-USER-004",
+      "name_cn": "用户登录与安全日志",
+      "platform": "admin",
+      "module_id": "account",
+      "route": "/admin/users/{id}/login-logs",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_users"
+      ],
+      "database_tables": [
+        "login_logs",
+        "security_events"
+      ],
+      "roles_raw": [
+        "安全/客服权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-USER-005",
+      "name_cn": "用户状态与封禁处理",
+      "platform": "admin",
+      "module_id": "account",
+      "route": "/admin/users/{id}/status",
+      "release_label_raw": "R01/R10",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "CONFIRMING",
+        "APPLYING",
+        "SUCCESS",
+        "CONFLICT",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_users",
+        "risk"
+      ],
+      "database_tables": [
+        "users",
+        "user_status_logs",
+        "admin_operation_logs"
+      ],
+      "roles_raw": [
+        "风控/超级管理员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-USER-006",
+      "name_cn": "账号注销申请处理",
+      "platform": "admin",
+      "module_id": "account",
+      "route": "/admin/account-deletions",
+      "release_label_raw": "R01/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "BLOCKED",
+        "PROCESSING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "admin_users"
+      ],
+      "database_tables": [
+        "account_deletion_requests",
+        "users",
+        "orders",
+        "withdrawal_requests"
+      ],
+      "roles_raw": [
+        "客服/合规权限员工"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-WALLET-001",
+      "name_cn": "奖励账户列表",
+      "platform": "admin",
+      "module_id": "wallet",
+      "route": "/admin/wallet/accounts",
+      "release_label_raw": "R07-R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "wallet_admin"
+      ],
+      "database_tables": [
+        "reward_accounts"
+      ],
+      "roles_raw": [
+        "财务/客服/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-WALLET-002",
+      "name_cn": "奖励流水与结算",
+      "platform": "admin",
+      "module_id": "wallet",
+      "route": "/admin/wallet/ledger",
+      "release_label_raw": "R07-R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "wallet_admin"
+      ],
+      "database_tables": [
+        "reward_ledger",
+        "reward_settlements",
+        "reward_freezes"
+      ],
+      "roles_raw": [
+        "财务/客服/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-WALLET-003",
+      "name_cn": "余额调整、冻结与冲正",
+      "platform": "admin",
+      "module_id": "wallet",
+      "route": "/admin/wallet/adjustments",
+      "release_label_raw": "R07-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "CREATE_DRAWER",
+        "IMPACT_CHECK",
+        "PROCESSING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "wallet_admin",
+        "audit"
+      ],
+      "database_tables": [
+        "reward_adjustments",
+        "reward_ledger",
+        "reward_freezes"
+      ],
+      "roles_raw": [
+        "财务负责人/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-WD-001",
+      "name_cn": "提现配置与支付宝出款健康",
+      "platform": "admin",
+      "module_id": "withdrawal",
+      "route": "/admin/withdrawals/config",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EDITING",
+        "VALIDATION_ERROR",
+        "TESTING",
+        "HEALTHY",
+        "UNHEALTHY"
+      ],
+      "api_groups": [
+        "withdrawal",
+        "health"
+      ],
+      "database_tables": [
+        "system_configs",
+        "provider_health_logs"
+      ],
+      "roles_raw": [
+        "财务负责人/超级管理员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-WD-002",
+      "name_cn": "提现申请列表",
+      "platform": "admin",
+      "module_id": "withdrawal",
+      "route": "/admin/withdrawals",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "EXPORTING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "withdrawal_admin"
+      ],
+      "database_tables": [
+        "withdrawal_requests"
+      ],
+      "roles_raw": [
+        "财务/客服/风控"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-WD-003",
+      "name_cn": "提现详情、审核与一键出款",
+      "platform": "admin",
+      "module_id": "withdrawal",
+      "route": "/admin/withdrawals/{id}",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "PENDING_REVIEW",
+        "APPROVING",
+        "PAYING",
+        "QUERYING",
+        "PAID",
+        "FAILED",
+        "RETURNING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "withdrawal_admin",
+        "wallet"
+      ],
+      "database_tables": [
+        "withdrawal_requests",
+        "payout_transactions",
+        "reward_ledger"
+      ],
+      "roles_raw": [
+        "财务/风控按权限"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-WD-004",
+      "name_cn": "出款调用与对账日志",
+      "platform": "admin",
+      "module_id": "withdrawal",
+      "route": "/admin/withdrawals/provider-logs",
+      "release_label_raw": "R08/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "QUERYING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "withdrawal_admin",
+        "health"
+      ],
+      "database_tables": [
+        "payout_transactions",
+        "payout_provider_logs",
+        "payout_reconciliation_records"
+      ],
+      "roles_raw": [
+        "财务/运维"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "ADMIN-XAPAY-001",
+      "name_cn": "在线支付网关配置与健康",
+      "platform": "admin",
+      "module_id": "payment",
+      "route": "/admin/integrations/xapay",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "TESTING",
+        "HEALTHY",
+        "UNHEALTHY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment",
+        "health"
+      ],
+      "database_tables": [
+        "provider_health_logs",
+        "system_configs"
+      ],
+      "roles_raw": [
+        "超级管理员/运维"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ABOUT-001",
+      "name_cn": "关于与检查更新页",
+      "platform": "android",
+      "module_id": "system",
+      "route": "/me/about",
+      "release_label_raw": "R10",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "CHECKING_UPDATE",
+        "UP_TO_DATE",
+        "UPDATE_AVAILABLE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "app_version",
+        "cms"
+      ],
+      "database_tables": [
+        "app_versions",
+        "agreements"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ACCOUNT-001",
+      "name_cn": "账号与安全中心",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/me/security",
+      "release_label_raw": "R01",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "LOADING",
+        "SESSION_RISK",
+        "NETWORK_ERROR"
+      ],
+      "api_groups": [
+        "account"
+      ],
+      "database_tables": [
+        "users",
+        "user_sessions",
+        "user_devices",
+        "login_logs"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ACCOUNT-002",
+      "name_cn": "登录设备页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/me/security/sessions",
+      "release_label_raw": "R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "REVOKING",
+        "REVOKED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "account"
+      ],
+      "database_tables": [
+        "user_sessions",
+        "user_devices",
+        "login_logs"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ACCOUNT-003",
+      "name_cn": "修改密码页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/me/security/password",
+      "release_label_raw": "R01",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "SUBMITTING",
+        "INVALID_CURRENT",
+        "WEAK_PASSWORD",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "account",
+        "captcha"
+      ],
+      "database_tables": [
+        "user_credentials",
+        "user_sessions",
+        "security_events"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ACCOUNT-004",
+      "name_cn": "换绑邮箱页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/me/security/email",
+      "release_label_raw": "R01",
+      "default_state_id": "VERIFY_OLD",
+      "state_ids": [
+        "VERIFY_OLD",
+        "VERIFY_NEW",
+        "CONFIRM",
+        "SENDING_CODE",
+        "SUBMITTING",
+        "CONFLICT",
+        "RATE_LIMITED",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "account",
+        "email",
+        "captcha"
+      ],
+      "database_tables": [
+        "users",
+        "email_verification_codes",
+        "user_sessions",
+        "security_events"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ACCOUNT-005",
+      "name_cn": "账号注销页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/me/security/deletion",
+      "release_label_raw": "R01",
+      "default_state_id": "ELIGIBILITY_CHECK",
+      "state_ids": [
+        "ELIGIBILITY_CHECK",
+        "BLOCKED_BY_BUSINESS",
+        "CONFIRM",
+        "SUBMITTING",
+        "PENDING",
+        "CANCELLED",
+        "COMPLETED"
+      ],
+      "api_groups": [
+        "account",
+        "captcha",
+        "order",
+        "wallet"
+      ],
+      "database_tables": [
+        "account_deletion_requests",
+        "orders",
+        "withdrawals",
+        "reward_accounts"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ANN-001",
+      "name_cn": "平台公告页",
+      "platform": "android",
+      "module_id": "interaction",
+      "route": "/messages/announcements",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "notification",
+        "cms"
+      ],
+      "database_tables": [
+        "announcements",
+        "announcement_reads"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-AUTH-001",
+      "name_cn": "登录页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/login",
+      "release_label_raw": "R01",
+      "default_state_id": "PASSWORD_TAB",
+      "state_ids": [
+        "PASSWORD_TAB",
+        "CODE_TAB",
+        "SENDING_CODE",
+        "CODE_SENT",
+        "SUBMITTING",
+        "INVALID_INPUT",
+        "RATE_LIMITED",
+        "LOGIN_FAILED"
+      ],
+      "api_groups": [
+        "auth",
+        "email",
+        "captcha"
+      ],
+      "database_tables": [
+        "users",
+        "user_credentials",
+        "email_verification_codes",
+        "user_sessions"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-AUTH-002",
+      "name_cn": "注册页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/register",
+      "release_label_raw": "R01",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "SENDING_CODE",
+        "CODE_SENT",
+        "SUBMITTING",
+        "INVITE_INVALID",
+        "EMAIL_EXISTS_OR_GENERIC_FAIL",
+        "RATE_LIMITED",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "auth",
+        "email",
+        "captcha",
+        "referral"
+      ],
+      "database_tables": [
+        "users",
+        "user_credentials",
+        "email_verification_codes",
+        "referral_relations",
+        "agreement_acceptances"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-AUTH-003",
+      "name_cn": "找回密码页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/password-recovery",
+      "release_label_raw": "R01",
+      "default_state_id": "EMAIL_STEP",
+      "state_ids": [
+        "EMAIL_STEP",
+        "CODE_STEP",
+        "PASSWORD_STEP",
+        "SENDING_CODE",
+        "SUBMITTING",
+        "RATE_LIMITED",
+        "EXPIRED",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "auth",
+        "email",
+        "captcha"
+      ],
+      "database_tables": [
+        "password_recovery_sessions",
+        "email_verification_codes",
+        "user_credentials"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-AUTH-004",
+      "name_cn": "账号受限页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/account-restricted",
+      "release_label_raw": "R01/R04",
+      "default_state_id": "FROZEN",
+      "state_ids": [
+        "FROZEN",
+        "BANNED",
+        "DELETION_PENDING",
+        "APPEAL_AVAILABLE",
+        "PERMANENT"
+      ],
+      "api_groups": [
+        "account",
+        "support"
+      ],
+      "database_tables": [
+        "users",
+        "user_status_logs",
+        "support_tickets"
+      ],
+      "roles_raw": [
+        "登录或冻结会话"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-CHAT-001",
+      "name_cn": "用户会话列表",
+      "platform": "android",
+      "module_id": "interaction",
+      "route": "/messages/chats",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "LOADING_MORE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "chat"
+      ],
+      "database_tables": [
+        "conversations",
+        "conversation_members",
+        "chat_messages"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-CHAT-002",
+      "name_cn": "一对一聊天页",
+      "platform": "android",
+      "module_id": "interaction",
+      "route": "/messages/chat/{conversationId}",
+      "release_label_raw": "R04",
+      "default_state_id": "CONNECTING",
+      "state_ids": [
+        "CONNECTING",
+        "CONNECTED",
+        "HISTORY_LOADING",
+        "CONTENT",
+        "SENDING",
+        "SEND_FAILED",
+        "OFFLINE_CATCHUP",
+        "BLOCKED",
+        "REPORTED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "chat",
+        "storage"
+      ],
+      "database_tables": [
+        "conversations",
+        "conversation_members",
+        "chat_messages",
+        "file_objects",
+        "user_blocks"
+      ],
+      "roles_raw": [
+        "登录且会话成员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-CHAT-003",
+      "name_cn": "发送联系方式面板",
+      "platform": "android",
+      "module_id": "interaction",
+      "route": "sheet://chat-contact",
+      "release_label_raw": "R04",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "SENDING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "chat"
+      ],
+      "database_tables": [
+        "chat_messages",
+        "user_profiles"
+      ],
+      "roles_raw": [
+        "登录且会话成员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-CHAT-004",
+      "name_cn": "聊天举报面板",
+      "platform": "android",
+      "module_id": "interaction",
+      "route": "sheet://chat-report",
+      "release_label_raw": "R04",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "SELECTING_MESSAGES",
+        "UPLOADING",
+        "SUBMITTING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "chat",
+        "storage"
+      ],
+      "database_tables": [
+        "chat_reports",
+        "chat_messages",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "登录且会话成员"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-CONTACT-001",
+      "name_cn": "联系方式面板",
+      "platform": "android",
+      "module_id": "content",
+      "route": "sheet://content-contact",
+      "release_label_raw": "R02",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "AVAILABLE",
+        "DENIED",
+        "EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content"
+      ],
+      "database_tables": [
+        "content_contacts",
+        "content_contact_access_logs"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-CONTENT-001",
+      "name_cn": "统一内容详情页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/contents/{id}",
+      "release_label_raw": "R02/R03/R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "OFFLINE",
+        "DELETED",
+        "CONTACT_LOCKED",
+        "RP_INELIGIBLE",
+        "RP_COUNTDOWN",
+        "RP_PAUSED",
+        "RP_SUCCESS",
+        "RP_SOLD_OUT",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content",
+        "redpacket",
+        "chat"
+      ],
+      "database_tables": [
+        "contents",
+        "content_media",
+        "content_contacts",
+        "content_stats",
+        "red_packet_campaigns",
+        "red_packet_claims"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-FAV-001",
+      "name_cn": "收藏与浏览记录页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/me/library",
+      "release_label_raw": "R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "LOADING_MORE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content"
+      ],
+      "database_tables": [
+        "content_favorites",
+        "content_view_logs"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-HELP-001",
+      "name_cn": "帮助中心",
+      "platform": "android",
+      "module_id": "support",
+      "route": "/support/help",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "SEARCH_RESULTS",
+        "EMPTY",
+        "ARTICLE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "support",
+        "cms"
+      ],
+      "database_tables": [
+        "cms_articles"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-HOME-001",
+      "name_cn": "首页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/home",
+      "release_label_raw": "R02",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "REFRESHING",
+        "LOADING_MORE",
+        "END",
+        "NETWORK_ERROR"
+      ],
+      "api_groups": [
+        "home",
+        "content",
+        "search"
+      ],
+      "database_tables": [
+        "contents",
+        "content_stats",
+        "home_configs",
+        "content_entitlements"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ID-001",
+      "name_cn": "实名认证中心",
+      "platform": "android",
+      "module_id": "identity",
+      "route": "/me/identity",
+      "release_label_raw": "R01",
+      "default_state_id": "NOT_STARTED",
+      "state_ids": [
+        "NOT_STARTED",
+        "FREE_ELIGIBLE",
+        "PAYMENT_REQUIRED",
+        "PAYMENT_PENDING",
+        "ELIGIBILITY_ACTIVE",
+        "VERIFYING",
+        "VERIFIED",
+        "RECAPTURE_REQUIRED",
+        "MANUAL_REVIEW",
+        "FAILED"
+      ],
+      "api_groups": [
+        "identity",
+        "payment"
+      ],
+      "database_tables": [
+        "identity_profiles",
+        "identity_sessions",
+        "identity_results",
+        "payment_business_orders"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ID-002",
+      "name_cn": "实名信息填写页",
+      "platform": "android",
+      "module_id": "identity",
+      "route": "/me/identity/form",
+      "release_label_raw": "R01",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "VALIDATING",
+        "SUBMITTING",
+        "ID_IN_USE",
+        "INVALID_ID",
+        "SESSION_EXPIRED",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "identity"
+      ],
+      "database_tables": [
+        "identity_sessions",
+        "identity_profiles",
+        "sensitive_data_logs"
+      ],
+      "roles_raw": [
+        "登录且具备认证资格"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ID-003",
+      "name_cn": "原生人脸动作采集页",
+      "platform": "android",
+      "module_id": "identity",
+      "route": "/me/identity/capture",
+      "release_label_raw": "R01",
+      "default_state_id": "CAMERA_PERMISSION_REQUIRED",
+      "state_ids": [
+        "CAMERA_PERMISSION_REQUIRED",
+        "READY",
+        "COUNTDOWN",
+        "CAPTURING",
+        "PROCESSING",
+        "VERIFYING",
+        "PERMISSION_DENIED",
+        "SESSION_EXPIRED",
+        "PROVIDER_ERROR"
+      ],
+      "api_groups": [
+        "identity",
+        "storage"
+      ],
+      "database_tables": [
+        "identity_sessions",
+        "identity_captures",
+        "file_objects",
+        "identity_provider_requests"
+      ],
+      "roles_raw": [
+        "登录且实名会话有效"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ID-004",
+      "name_cn": "实名认证结果页",
+      "platform": "android",
+      "module_id": "identity",
+      "route": "/me/identity/result",
+      "release_label_raw": "R01",
+      "default_state_id": "VERIFIED",
+      "state_ids": [
+        "VERIFIED",
+        "RECAPTURE_REQUIRED",
+        "MANUAL_REVIEW",
+        "MISMATCH",
+        "PROVIDER_ERROR",
+        "FAILED",
+        "EXPIRED"
+      ],
+      "api_groups": [
+        "identity"
+      ],
+      "database_tables": [
+        "identity_results",
+        "identity_manual_actions"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-INVALID-001",
+      "name_cn": "链接或群信息失效反馈面板",
+      "platform": "android",
+      "module_id": "governance",
+      "route": "sheet://content-invalid",
+      "release_label_raw": "R03",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "SUBMITTING",
+        "SUCCESS",
+        "DUPLICATE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "governance"
+      ],
+      "database_tables": [
+        "content_invalid_feedback"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ME-001",
+      "name_cn": "我的首页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/me",
+      "release_label_raw": "R03-R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "ERROR"
+      ],
+      "api_groups": [
+        "account",
+        "membership",
+        "wallet"
+      ],
+      "database_tables": [
+        "users",
+        "user_profiles",
+        "user_memberships",
+        "reward_accounts"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-MEMBER-001",
+      "name_cn": "Pro会员中心",
+      "platform": "android",
+      "module_id": "membership",
+      "route": "/me/membership",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "NON_MEMBER",
+        "ACTIVE",
+        "EXPIRING",
+        "EXPIRED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "membership",
+        "product"
+      ],
+      "database_tables": [
+        "membership_plans",
+        "membership_skus",
+        "user_memberships"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-MEMBER-002",
+      "name_cn": "会员购买/续费/升级确认页",
+      "platform": "android",
+      "module_id": "membership",
+      "route": "/me/membership/confirm",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "PURCHASE_QUOTE",
+        "RENEW_QUOTE",
+        "UPGRADE_QUOTE",
+        "QUOTE_EXPIRED",
+        "CREATING_ORDER",
+        "ERROR"
+      ],
+      "api_groups": [
+        "membership",
+        "order",
+        "payment"
+      ],
+      "database_tables": [
+        "membership_quotes",
+        "payment_business_orders",
+        "membership_snapshots"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-MSG-001",
+      "name_cn": "消息中心",
+      "platform": "android",
+      "module_id": "interaction",
+      "route": "/messages",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "chat",
+        "notification"
+      ],
+      "database_tables": [
+        "conversations",
+        "notifications",
+        "announcements"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-MYCONTENT-001",
+      "name_cn": "我的发布列表",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/me/contents",
+      "release_label_raw": "R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "LOADING_MORE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content"
+      ],
+      "database_tables": [
+        "contents",
+        "content_reviews"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-MYCONTENT-002",
+      "name_cn": "发布管理详情",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/me/contents/{id}",
+      "release_label_raw": "R03/R06/R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "ONLINE",
+        "PENDING_REVIEW",
+        "REJECTED",
+        "OFFLINE",
+        "PLATFORM_OFFLINE",
+        "DELETE_BLOCKED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content",
+        "prop",
+        "redpacket"
+      ],
+      "database_tables": [
+        "contents",
+        "content_reviews",
+        "content_entitlements",
+        "red_packet_campaigns"
+      ],
+      "roles_raw": [
+        "登录且所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-MYCONTENT-003",
+      "name_cn": "审核记录与申诉页",
+      "platform": "android",
+      "module_id": "governance",
+      "route": "/me/contents/{id}/reviews",
+      "release_label_raw": "R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "RECORDS",
+        "NO_RECORD",
+        "APPEAL_FORM",
+        "APPEAL_PENDING",
+        "APPEAL_DECIDED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "governance",
+        "storage"
+      ],
+      "database_tables": [
+        "content_reviews",
+        "content_appeals",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "登录且所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-MYCONTENT-004",
+      "name_cn": "内容数据页",
+      "platform": "android",
+      "module_id": "analytics",
+      "route": "/me/contents/{id}/analytics",
+      "release_label_raw": "R03/R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "DATA",
+        "NO_DATA",
+        "ERROR"
+      ],
+      "api_groups": [
+        "analytics",
+        "content",
+        "redpacket"
+      ],
+      "database_tables": [
+        "content_daily_stats",
+        "content_stats",
+        "red_packet_stats"
+      ],
+      "roles_raw": [
+        "登录且所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-NOTICE-001",
+      "name_cn": "系统提醒页",
+      "platform": "android",
+      "module_id": "interaction",
+      "route": "/messages/notifications",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "LOADING_MORE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "notification"
+      ],
+      "database_tables": [
+        "notifications"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ORDER-001",
+      "name_cn": "订单列表",
+      "platform": "android",
+      "module_id": "transaction",
+      "route": "/me/orders",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "LOADING_MORE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "order",
+        "payment"
+      ],
+      "database_tables": [
+        "payment_business_orders",
+        "payment_attempts"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-ORDER-002",
+      "name_cn": "订单详情",
+      "platform": "android",
+      "module_id": "transaction",
+      "route": "/me/orders/{outTradeNo}",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "WAIT_PAY",
+        "PAYING",
+        "MANUAL_REVIEW",
+        "PAID",
+        "FULFILLED",
+        "CLOSED",
+        "FAILED",
+        "CORRECTION_PENDING"
+      ],
+      "api_groups": [
+        "order",
+        "payment"
+      ],
+      "database_tables": [
+        "payment_business_orders",
+        "payment_attempts",
+        "payment_events",
+        "manual_payment_submissions"
+      ],
+      "roles_raw": [
+        "登录且所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PAY-001",
+      "name_cn": "Android原生收银台",
+      "platform": "android",
+      "module_id": "payment",
+      "route": "/cashier/{outTradeNo}",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "READY",
+        "METHOD_UNAVAILABLE",
+        "EXPIRED",
+        "STARTING_PAYMENT",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment"
+      ],
+      "database_tables": [
+        "payment_business_orders",
+        "payment_method_configs"
+      ],
+      "roles_raw": [
+        "登录且订单所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PAY-002",
+      "name_cn": "在线支付容器",
+      "platform": "android",
+      "module_id": "payment",
+      "route": "/payment/xapay/{outTradeNo}",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "EXTERNAL_APP_LAUNCHED",
+        "RETURNED",
+        "QUERYING",
+        "PAID",
+        "PENDING",
+        "FAILED"
+      ],
+      "api_groups": [
+        "payment"
+      ],
+      "database_tables": [
+        "payment_attempts",
+        "payment_events"
+      ],
+      "roles_raw": [
+        "登录且订单所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PAY-003",
+      "name_cn": "人工扫码支付页",
+      "platform": "android",
+      "module_id": "payment",
+      "route": "/payment/manual/{outTradeNo}",
+      "release_label_raw": "R05",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "READY",
+        "QR_UNAVAILABLE",
+        "EXPIRED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment",
+        "storage"
+      ],
+      "database_tables": [
+        "payment_qr_codes",
+        "payment_business_orders"
+      ],
+      "roles_raw": [
+        "登录且订单所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PAY-004",
+      "name_cn": "人工付款凭证提交与状态页",
+      "platform": "android",
+      "module_id": "payment",
+      "route": "/payment/manual/{outTradeNo}/submission",
+      "release_label_raw": "R05",
+      "default_state_id": "NO_SUBMISSION",
+      "state_ids": [
+        "NO_SUBMISSION",
+        "UPLOADING",
+        "SUBMITTING",
+        "PENDING_REVIEW",
+        "APPROVED",
+        "REJECTED",
+        "VERSION_CONFLICT",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment",
+        "storage"
+      ],
+      "database_tables": [
+        "manual_payment_submissions",
+        "file_objects",
+        "payment_events"
+      ],
+      "roles_raw": [
+        "登录且订单所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PROFILE-001",
+      "name_cn": "个人资料页",
+      "platform": "android",
+      "module_id": "account",
+      "route": "/me/profile",
+      "release_label_raw": "R01",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "EDITING",
+        "UPLOADING_AVATAR",
+        "SAVING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "account",
+        "storage"
+      ],
+      "database_tables": [
+        "user_profiles",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PROP-001",
+      "name_cn": "道具中心",
+      "platform": "android",
+      "module_id": "prop",
+      "route": "/me/props",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "STORE",
+        "INVENTORY",
+        "EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "prop",
+        "product"
+      ],
+      "database_tables": [
+        "prop_definitions",
+        "user_props",
+        "prop_execution_logs"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PROP-002",
+      "name_cn": "使用道具页",
+      "platform": "android",
+      "module_id": "prop",
+      "route": "/me/props/use/{userPropId}",
+      "release_label_raw": "R06",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "SELECT_CONTENT",
+        "CONFLICT",
+        "COOLDOWN",
+        "CONFIRMING",
+        "EXECUTING",
+        "SUCCESS",
+        "FAILED"
+      ],
+      "api_groups": [
+        "prop",
+        "content"
+      ],
+      "database_tables": [
+        "user_props",
+        "content_entitlements",
+        "prop_execution_logs"
+      ],
+      "roles_raw": [
+        "登录且道具所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PUBLISH-001",
+      "name_cn": "发布入口页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/publish",
+      "release_label_raw": "R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "AVAILABLE",
+        "IDENTITY_REQUIRED",
+        "LIMIT_REACHED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content",
+        "identity",
+        "membership"
+      ],
+      "database_tables": [
+        "contents",
+        "user_memberships",
+        "identity_profiles"
+      ],
+      "roles_raw": [
+        "登录且实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PUBLISH-002",
+      "name_cn": "项目发布编辑页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/publish/project/{id?}",
+      "release_label_raw": "R03",
+      "default_state_id": "CREATE",
+      "state_ids": [
+        "CREATE",
+        "EDIT_DRAFT",
+        "EDIT_ONLINE_REVISION",
+        "AUTOSAVING",
+        "UPLOADING",
+        "VALIDATION_ERROR",
+        "SUBMITTING",
+        "SAVED"
+      ],
+      "api_groups": [
+        "content",
+        "storage"
+      ],
+      "database_tables": [
+        "contents",
+        "content_versions",
+        "content_media",
+        "content_contacts"
+      ],
+      "roles_raw": [
+        "登录且实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PUBLISH-003",
+      "name_cn": "App推广发布编辑页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/publish/app/{id?}",
+      "release_label_raw": "R03",
+      "default_state_id": "CREATE",
+      "state_ids": [
+        "CREATE",
+        "EDIT_DRAFT",
+        "EDIT_ONLINE_REVISION",
+        "AUTOSAVING",
+        "UPLOADING",
+        "VALIDATION_ERROR",
+        "SUBMITTING",
+        "SAVED"
+      ],
+      "api_groups": [
+        "content",
+        "storage"
+      ],
+      "database_tables": [
+        "contents",
+        "content_versions",
+        "content_media",
+        "content_contacts"
+      ],
+      "roles_raw": [
+        "登录且实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PUBLISH-004",
+      "name_cn": "群聊推广发布编辑页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/publish/group/{id?}",
+      "release_label_raw": "R03",
+      "default_state_id": "CREATE",
+      "state_ids": [
+        "CREATE",
+        "EDIT_DRAFT",
+        "EDIT_ONLINE_REVISION",
+        "AUTOSAVING",
+        "UPLOADING",
+        "VALIDATION_ERROR",
+        "SUBMITTING",
+        "SAVED"
+      ],
+      "api_groups": [
+        "content",
+        "storage"
+      ],
+      "database_tables": [
+        "contents",
+        "content_versions",
+        "content_media",
+        "content_contacts"
+      ],
+      "roles_raw": [
+        "登录且实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PUBLISH-005",
+      "name_cn": "团队长资料编辑页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/publish/team-leader",
+      "release_label_raw": "R03",
+      "default_state_id": "CREATE",
+      "state_ids": [
+        "CREATE",
+        "EDIT_DRAFT",
+        "EDIT_ONLINE_REVISION",
+        "AUTOSAVING",
+        "UPLOADING",
+        "VALIDATION_ERROR",
+        "SUBMITTING",
+        "SAVED"
+      ],
+      "api_groups": [
+        "content",
+        "storage"
+      ],
+      "database_tables": [
+        "contents",
+        "content_versions",
+        "content_media",
+        "content_contacts"
+      ],
+      "roles_raw": [
+        "登录且实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PUBLISH-006",
+      "name_cn": "发布预览与提交结果页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/publish/preview",
+      "release_label_raw": "R03",
+      "default_state_id": "PREVIEW",
+      "state_ids": [
+        "PREVIEW",
+        "SUBMITTING",
+        "PENDING_REVIEW",
+        "ONLINE",
+        "SUBMIT_FAILED"
+      ],
+      "api_groups": [
+        "content"
+      ],
+      "database_tables": [
+        "contents",
+        "content_versions",
+        "content_reviews"
+      ],
+      "roles_raw": [
+        "登录且实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-PUBLISHER-001",
+      "name_cn": "发布者主页",
+      "platform": "android",
+      "module_id": "content",
+      "route": "/publishers/{userId}",
+      "release_label_raw": "R02",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "EMPTY",
+        "OFFLINE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "account",
+        "content"
+      ],
+      "database_tables": [
+        "user_profiles",
+        "contents",
+        "user_memberships"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-REF-001",
+      "name_cn": "推广中心",
+      "platform": "android",
+      "module_id": "growth",
+      "route": "/me/referral",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "IDENTITY_REQUIRED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral",
+        "wallet"
+      ],
+      "database_tables": [
+        "invite_codes",
+        "referral_relations",
+        "commission_records",
+        "reward_accounts"
+      ],
+      "roles_raw": [
+        "登录+实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-REF-002",
+      "name_cn": "邀请好友与海报页",
+      "platform": "android",
+      "module_id": "growth",
+      "route": "/me/referral/invite",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "READY",
+        "POSTER_RENDERING",
+        "SHARING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral",
+        "h5",
+        "storage"
+      ],
+      "database_tables": [
+        "invite_codes",
+        "referral_materials",
+        "share_records"
+      ],
+      "roles_raw": [
+        "登录+实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-REF-003",
+      "name_cn": "直推用户页",
+      "platform": "android",
+      "module_id": "growth",
+      "route": "/me/referral/direct",
+      "release_label_raw": "R08/R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral",
+        "growth"
+      ],
+      "database_tables": [
+        "referral_relations",
+        "referral_activity_progress",
+        "referral_milestone_rewards"
+      ],
+      "roles_raw": [
+        "登录+实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-REF-004",
+      "name_cn": "二级用户与消费佣金页",
+      "platform": "android",
+      "module_id": "growth",
+      "route": "/me/referral/commissions",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LEVEL2",
+        "COMMISSIONS",
+        "EMPTY",
+        "DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral",
+        "wallet"
+      ],
+      "database_tables": [
+        "referral_relations",
+        "commission_records",
+        "reward_ledger"
+      ],
+      "roles_raw": [
+        "登录+实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-REF-005",
+      "name_cn": "直推活跃阶梯奖励页",
+      "platform": "android",
+      "module_id": "growth",
+      "route": "/me/referral/activity-rewards",
+      "release_label_raw": "R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "RULES",
+        "PROGRESS",
+        "EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "growth",
+        "wallet"
+      ],
+      "database_tables": [
+        "referral_activity_rules",
+        "referral_activity_progress",
+        "referral_milestones",
+        "referral_milestone_rewards"
+      ],
+      "roles_raw": [
+        "登录+实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-REPORT-001",
+      "name_cn": "内容举报面板",
+      "platform": "android",
+      "module_id": "governance",
+      "route": "sheet://content-report",
+      "release_label_raw": "R03",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "UPLOADING",
+        "SUBMITTING",
+        "DUPLICATE",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "governance",
+        "storage"
+      ],
+      "database_tables": [
+        "content_reports",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-REWARD-001",
+      "name_cn": "奖励账户与流水页",
+      "platform": "android",
+      "module_id": "wallet",
+      "route": "/me/rewards",
+      "release_label_raw": "R07-R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "ACCOUNT",
+        "EMPTY",
+        "LEDGER_DETAIL",
+        "ERROR"
+      ],
+      "api_groups": [
+        "wallet"
+      ],
+      "database_tables": [
+        "reward_accounts",
+        "reward_ledger",
+        "reward_settlements",
+        "reward_freezes"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-RP-ADV-001",
+      "name_cn": "投放红包设置与报价页",
+      "platform": "android",
+      "module_id": "redpacket",
+      "route": "/me/contents/{id}/red-packet/create",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "FORM",
+        "VALIDATION_ERROR",
+        "QUOTE_LOADING",
+        "QUOTE_READY",
+        "QUOTE_EXPIRED",
+        "CREATING_ORDER",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket",
+        "order",
+        "payment"
+      ],
+      "database_tables": [
+        "red_packet_campaigns",
+        "red_packet_quotes",
+        "payment_business_orders"
+      ],
+      "roles_raw": [
+        "登录+实名+内容所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-RP-ADV-002",
+      "name_cn": "红包活动管理页",
+      "platform": "android",
+      "module_id": "redpacket",
+      "route": "/me/red-packet-campaigns/{id}",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "ACTIVE",
+        "PAUSED",
+        "SOLD_OUT",
+        "CLOSED",
+        "PLATFORM_STOPPED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket",
+        "analytics"
+      ],
+      "database_tables": [
+        "red_packet_campaigns",
+        "red_packet_batches",
+        "red_packet_claims",
+        "red_packet_stats",
+        "red_packet_ledger"
+      ],
+      "roles_raw": [
+        "登录且活动所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-RP-ADV-003",
+      "name_cn": "红包追加投放页",
+      "platform": "android",
+      "module_id": "redpacket",
+      "route": "/me/red-packet-campaigns/{id}/add-batch",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "FORM",
+        "QUOTE_READY",
+        "CREATING_ORDER",
+        "PAYMENT_PENDING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket",
+        "order",
+        "payment"
+      ],
+      "database_tables": [
+        "red_packet_batches",
+        "red_packet_quotes",
+        "payment_business_orders"
+      ],
+      "roles_raw": [
+        "登录且活动所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-RP-FEED-001",
+      "name_cn": "红包内容聚合页",
+      "platform": "android",
+      "module_id": "redpacket",
+      "route": "/red-packets",
+      "release_label_raw": "R07",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "AVAILABLE",
+        "EMPTY",
+        "CLAIMED_TODAY",
+        "LIFETIME_LIMIT",
+        "SOLD_OUT",
+        "ERROR"
+      ],
+      "api_groups": [
+        "redpacket",
+        "content"
+      ],
+      "database_tables": [
+        "red_packet_campaigns",
+        "red_packet_batches",
+        "red_packet_claims",
+        "contents"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-SEARCH-001",
+      "name_cn": "搜索入口页",
+      "platform": "android",
+      "module_id": "search",
+      "route": "/search",
+      "release_label_raw": "R02",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "TYPING",
+        "HISTORY_EMPTY",
+        "HOT_EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "search"
+      ],
+      "database_tables": [
+        "search_histories",
+        "hot_search_terms"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-SEARCH-002",
+      "name_cn": "搜索结果页",
+      "platform": "android",
+      "module_id": "search",
+      "route": "/search/results",
+      "release_label_raw": "R02",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "RESULTS",
+        "EMPTY",
+        "FILTER_EMPTY",
+        "LOADING_MORE",
+        "END",
+        "ERROR"
+      ],
+      "api_groups": [
+        "search",
+        "content"
+      ],
+      "database_tables": [
+        "contents",
+        "content_stats",
+        "search_histories"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-SEC-001",
+      "name_cn": "图形安全验证码弹窗",
+      "platform": "android",
+      "module_id": "security",
+      "route": "dialog://captcha",
+      "release_label_raw": "P00/R01",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "DEFAULT",
+        "VERIFYING",
+        "WRONG",
+        "EXPIRED",
+        "REFRESHING",
+        "LOCKED",
+        "RATE_LIMITED",
+        "SUCCESS"
+      ],
+      "api_groups": [
+        "captcha"
+      ],
+      "database_tables": [
+        "captcha_challenges",
+        "captcha_tickets"
+      ],
+      "roles_raw": [
+        "公开或登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-SET-001",
+      "name_cn": "设置页",
+      "platform": "android",
+      "module_id": "system",
+      "route": "/me/settings",
+      "release_label_raw": "R04/R10",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "CLEARING_CACHE",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "account",
+        "notification"
+      ],
+      "database_tables": [
+        "user_settings",
+        "user_sessions"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-SHARE-001",
+      "name_cn": "内容分享面板",
+      "platform": "android",
+      "module_id": "content",
+      "route": "sheet://content-share",
+      "release_label_raw": "R03",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "READY",
+        "SHARING",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content",
+        "h5"
+      ],
+      "database_tables": [
+        "share_records",
+        "contents"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-SYS-001",
+      "name_cn": "启动页",
+      "platform": "android",
+      "module_id": "system",
+      "route": "/splash",
+      "release_label_raw": "R01",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "BOOTSTRAP_LOADING",
+        "SESSION_VALID",
+        "SESSION_INVALID",
+        "MAINTENANCE",
+        "UPDATE_REQUIRED",
+        "NETWORK_ERROR"
+      ],
+      "api_groups": [
+        "app_version",
+        "auth",
+        "security"
+      ],
+      "database_tables": [
+        "app_versions",
+        "user_sessions"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-SYS-002",
+      "name_cn": "系统维护页",
+      "platform": "android",
+      "module_id": "system",
+      "route": "/maintenance",
+      "release_label_raw": "R01/R10",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "RETRYING",
+        "RECOVERED",
+        "NETWORK_ERROR"
+      ],
+      "api_groups": [
+        "app_version",
+        "system_config"
+      ],
+      "database_tables": [
+        "system_configs"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-SYS-003",
+      "name_cn": "版本更新页",
+      "platform": "android",
+      "module_id": "system",
+      "route": "/update",
+      "release_label_raw": "R10",
+      "default_state_id": "OPTIONAL",
+      "state_ids": [
+        "OPTIONAL",
+        "RECOMMENDED",
+        "FORCED",
+        "DOWNLOADING",
+        "VERIFYING",
+        "READY_INSTALL",
+        "DOWNLOAD_FAILED"
+      ],
+      "api_groups": [
+        "app_version",
+        "storage"
+      ],
+      "database_tables": [
+        "app_versions",
+        "file_objects",
+        "app_download_logs"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-TASK-001",
+      "name_cn": "个人任务中心",
+      "platform": "android",
+      "module_id": "task",
+      "route": "/me/tasks",
+      "release_label_raw": "R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "COMPLETED",
+        "REWARD_PENDING",
+        "BUDGET_EXHAUSTED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "task",
+        "wallet"
+      ],
+      "database_tables": [
+        "task_definitions",
+        "user_task_progress",
+        "reward_grants"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-TASK-002",
+      "name_cn": "任务积分与奖励记录页",
+      "platform": "android",
+      "module_id": "task",
+      "route": "/me/tasks/points",
+      "release_label_raw": "R09",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "ACCOUNT",
+        "LEDGER",
+        "EMPTY",
+        "ERROR"
+      ],
+      "api_groups": [
+        "task",
+        "wallet"
+      ],
+      "database_tables": [
+        "user_point_accounts",
+        "user_point_ledger",
+        "reward_grants",
+        "reward_ledger"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-TICKET-001",
+      "name_cn": "客服工单列表",
+      "platform": "android",
+      "module_id": "support",
+      "route": "/support/tickets",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "LOADING_MORE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "support"
+      ],
+      "database_tables": [
+        "support_tickets"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-TICKET-002",
+      "name_cn": "创建客服工单页",
+      "platform": "android",
+      "module_id": "support",
+      "route": "/support/tickets/create",
+      "release_label_raw": "R04",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "UPLOADING",
+        "SUBMITTING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "support",
+        "storage"
+      ],
+      "database_tables": [
+        "support_tickets",
+        "ticket_messages",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-TICKET-003",
+      "name_cn": "客服工单详情页",
+      "platform": "android",
+      "module_id": "support",
+      "route": "/support/tickets/{id}",
+      "release_label_raw": "R04",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "REPLYING",
+        "UPLOADING",
+        "CLOSED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "support",
+        "storage"
+      ],
+      "database_tables": [
+        "support_tickets",
+        "ticket_messages",
+        "file_objects"
+      ],
+      "roles_raw": [
+        "登录且所有者"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-WD-001",
+      "name_cn": "支付宝提现账户页",
+      "platform": "android",
+      "module_id": "withdrawal",
+      "route": "/me/withdrawal/account",
+      "release_label_raw": "R08",
+      "default_state_id": "UNBOUND",
+      "state_ids": [
+        "UNBOUND",
+        "BOUND",
+        "EDITING",
+        "SUBMITTING",
+        "COOLDOWN",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "withdrawal",
+        "captcha"
+      ],
+      "database_tables": [
+        "payout_accounts",
+        "identity_profiles",
+        "security_events"
+      ],
+      "roles_raw": [
+        "登录+实名"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-WD-002",
+      "name_cn": "申请提现页",
+      "platform": "android",
+      "module_id": "withdrawal",
+      "route": "/me/withdrawal/create",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "ELIGIBLE",
+        "INSUFFICIENT",
+        "DAILY_LIMIT",
+        "CONFIRM",
+        "SUBMITTING",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "withdrawal",
+        "wallet",
+        "captcha"
+      ],
+      "database_tables": [
+        "withdrawal_requests",
+        "reward_accounts",
+        "reward_ledger",
+        "payout_accounts"
+      ],
+      "roles_raw": [
+        "登录+实名+已绑定"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-WD-003",
+      "name_cn": "提现记录与详情页",
+      "platform": "android",
+      "module_id": "withdrawal",
+      "route": "/me/withdrawals",
+      "release_label_raw": "R08",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "LIST",
+        "EMPTY",
+        "DETAIL",
+        "PENDING_REVIEW",
+        "PAYOUT_PROCESSING",
+        "SUCCESS",
+        "FAILED",
+        "RETURNED",
+        "RECONCILE_REQUIRED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "withdrawal"
+      ],
+      "database_tables": [
+        "withdrawal_requests",
+        "payout_transactions",
+        "payout_callbacks"
+      ],
+      "roles_raw": [
+        "登录"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "APP-WEB-001",
+      "name_cn": "受控Web内容容器",
+      "platform": "android",
+      "module_id": "system",
+      "route": "/web",
+      "release_label_raw": "R04/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "ERROR",
+        "BLOCKED_HOST"
+      ],
+      "api_groups": [
+        "h5"
+      ],
+      "database_tables": [
+        "h5_page_configs"
+      ],
+      "roles_raw": [
+        "登录或公开令牌"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-AGREEMENT-001",
+      "name_cn": "协议与规则页",
+      "platform": "h5",
+      "module_id": "cms",
+      "route": "/agreement/{code}",
+      "release_label_raw": "R01-R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "NOT_FOUND",
+        "ERROR"
+      ],
+      "api_groups": [
+        "cms"
+      ],
+      "database_tables": [
+        "agreements",
+        "agreement_versions"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-APP-REDIRECT-001",
+      "name_cn": "App深链与下载兜底页",
+      "platform": "h5",
+      "module_id": "h5",
+      "route": "/open",
+      "release_label_raw": "R10",
+      "default_state_id": "VALIDATING",
+      "state_ids": [
+        "VALIDATING",
+        "OPENING_APP",
+        "FALLBACK_DOWNLOAD",
+        "INVALID_TARGET",
+        "ERROR"
+      ],
+      "api_groups": [
+        "h5",
+        "app_version"
+      ],
+      "database_tables": [
+        "h5_redirect_logs",
+        "app_versions"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-DOWNLOAD-001",
+      "name_cn": "品牌宣传与App下载页",
+      "platform": "h5",
+      "module_id": "h5_cms",
+      "route": "/",
+      "release_label_raw": "R10",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "LOADING_VERSION",
+        "DOWNLOAD_READY",
+        "NO_RELEASE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "h5",
+        "cms",
+        "app_version"
+      ],
+      "database_tables": [
+        "h5_page_configs",
+        "app_versions",
+        "app_download_logs"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-HELP-001",
+      "name_cn": "公开帮助文章页",
+      "platform": "h5",
+      "module_id": "cms",
+      "route": "/help/{id}",
+      "release_label_raw": "R04/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "NOT_FOUND",
+        "ERROR"
+      ],
+      "api_groups": [
+        "cms",
+        "h5"
+      ],
+      "database_tables": [
+        "cms_articles"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-INSTALL-001",
+      "name_cn": "Android安装教程页",
+      "platform": "h5",
+      "module_id": "h5_cms",
+      "route": "/install-guide",
+      "release_label_raw": "R10",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "ARTICLE",
+        "ERROR"
+      ],
+      "api_groups": [
+        "h5",
+        "cms"
+      ],
+      "database_tables": [
+        "cms_articles"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-INVITE-001",
+      "name_cn": "邀请落地页",
+      "platform": "h5",
+      "module_id": "referral",
+      "route": "/invite/{code}",
+      "release_label_raw": "R01/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "VALID",
+        "INVALID",
+        "EXPIRED",
+        "ERROR"
+      ],
+      "api_groups": [
+        "referral",
+        "h5"
+      ],
+      "database_tables": [
+        "invite_codes",
+        "referral_attributions",
+        "h5_page_configs"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-PAY-RETURN-001",
+      "name_cn": "支付同步返回页",
+      "platform": "h5",
+      "module_id": "payment",
+      "route": "/payment/result",
+      "release_label_raw": "R05",
+      "default_state_id": "QUERYING",
+      "state_ids": [
+        "QUERYING",
+        "PAID",
+        "PENDING",
+        "FAILED",
+        "INVALID_TOKEN",
+        "ERROR"
+      ],
+      "api_groups": [
+        "payment",
+        "h5"
+      ],
+      "database_tables": [
+        "payment_business_orders",
+        "payment_events"
+      ],
+      "roles_raw": [
+        "公开一次性订单令牌"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-REGISTER-001",
+      "name_cn": "H5邀请注册页",
+      "platform": "h5",
+      "module_id": "account",
+      "route": "/invite/{code}/register",
+      "release_label_raw": "R01",
+      "default_state_id": "DEFAULT",
+      "state_ids": [
+        "DEFAULT",
+        "SENDING_CODE",
+        "CODE_SENT",
+        "SUBMITTING",
+        "INVITE_INVALID",
+        "RATE_LIMITED",
+        "SUCCESS",
+        "ERROR"
+      ],
+      "api_groups": [
+        "auth",
+        "email",
+        "captcha",
+        "referral"
+      ],
+      "database_tables": [
+        "users",
+        "email_verification_codes",
+        "referral_relations",
+        "agreement_acceptances"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    },
+    {
+      "page_id": "H5-SHARE-001",
+      "name_cn": "统一内容分享页",
+      "platform": "h5",
+      "module_id": "content",
+      "route": "/share/{type}/{id}",
+      "release_label_raw": "R03/R10",
+      "default_state_id": "LOADING",
+      "state_ids": [
+        "LOADING",
+        "CONTENT",
+        "OFFLINE",
+        "DELETED",
+        "OPEN_APP",
+        "ERROR"
+      ],
+      "api_groups": [
+        "content",
+        "h5"
+      ],
+      "database_tables": [
+        "contents",
+        "content_media",
+        "user_profiles",
+        "h5_page_configs"
+      ],
+      "roles_raw": [
+        "公开"
+      ],
+      "visual_diff_percent_max": 2.0
+    }
+  ]
+}
