@@ -13,7 +13,8 @@
     captcha: "",
     captchaCode: "7K4M",
     returnPage: "auth",
-    returnState: "DEFAULT"
+    returnState: "DEFAULT",
+    passwordFields: { current: "", next: "", confirm: "" }
   };
 
   const root = document.querySelector("#app");
@@ -83,6 +84,7 @@
     input.autocomplete = options.autocomplete || "off";
     input.placeholder = options.placeholder || "";
     input.value = options.value || "";
+    input.style.cssText = target.style.cssText;
     if (options.maxLength) input.maxLength = options.maxLength;
     target.replaceWith(input);
     return input;
@@ -97,7 +99,7 @@
     close.type = "button";
     close.className = "hhy-close-button";
     close.setAttribute("aria-label", "关闭安全验证");
-    close.textContent = "×";
+    close.innerHTML = asset("ICON-CLOSE");
     icon.replaceWith(close);
     return close;
   }
@@ -225,11 +227,16 @@
     const body = type === "password"
       ? "<div class=\"hhy-drawer-card\"><h3>设置新密码</h3><div class=\"hhy-field\"><label>当前密码</label><input type=\"password\"></div><div class=\"hhy-field\"><label>新密码</label><input type=\"password\"></div><div class=\"hhy-field\"><label>确认新密码</label><input type=\"password\"></div><div class=\"hhy-actions\"><button class=\"btn outline hhy-dismiss\">取消</button><button class=\"btn primary hhy-protected\">提交安全验证</button></div></div>"
       : "<div class=\"hhy-drawer-card\"><h3>活跃会话</h3><div class=\"hhy-session\">" + asset("ICON-DEVICE") + "<div><strong>Windows · Edge</strong><span>北京 · 2026-08-17 10:24 · 当前设备</span></div><span class=\"badge green\">当前</span></div><div class=\"hhy-session\">" + asset("ICON-DEVICE") + "<div><strong>iPhone · Safari</strong><span>上海 · 2026-08-16 20:16</span></div><button class=\"hhy-end hhy-protected\">退出</button></div></div><div class=\"hhy-drawer-card\"><h3>会话保护</h3><p style=\"margin:0;color:#738097;font-size:12px;line-height:18px\">结束其他登录会话需要完成一次安全验证。</p><div class=\"hhy-actions\"><button class=\"btn danger hhy-protected\">退出其他会话</button></div></div>";
-    drawer.innerHTML = "<div class=\"hhy-drawer-top\"><span>" + title + "</span><button class=\"hhy-close\" aria-label=\"关闭\">×</button></div><p class=\"hhy-drawer-sub\">敏感操作会被记录到后台审计日志。</p>" + body;
+    drawer.innerHTML = "<div class=\"hhy-drawer-top\"><span>" + title + "</span><button class=\"hhy-close\" aria-label=\"关闭\">" + asset("ICON-CLOSE") + "</button></div><p class=\"hhy-drawer-sub\">敏感操作会被记录到后台审计日志。</p>" + body;
     const dismiss = () => go("self", "DEFAULT");
     backdrop.addEventListener("click", dismiss);
     drawer.querySelector(".hhy-close").addEventListener("click", dismiss);
     drawer.querySelectorAll(".hhy-dismiss").forEach((item) => item.addEventListener("click", dismiss));
+    drawer.querySelectorAll("input[type=password]").forEach((input, index) => {
+      const key = ["current", "next", "confirm"][index];
+      input.value = memory.passwordFields[key];
+      input.addEventListener("input", () => { memory.passwordFields[key] = input.value; });
+    });
     drawer.querySelectorAll(".hhy-protected").forEach((item) => item.addEventListener("click", () => {
       memory.returnPage = "self";
       memory.returnState = type === "password" ? "EDIT_PASSWORD" : "SESSION_LIST";
