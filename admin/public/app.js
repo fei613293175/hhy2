@@ -15,6 +15,7 @@
     returnPage: "auth",
     returnState: "DEFAULT",
     canReturn: false,
+    selfDrawer: null,
     passwordFields: { current: "", next: "", confirm: "" }
   };
 
@@ -35,8 +36,7 @@
   }
 
   function sourceFor(page, state) {
-    const sourceState = page === "self" ? "DEFAULT" : state;
-    return "reference/" + catalog[page].source + "__" + sourceState + ".html";
+    return "reference/" + catalog[page].source + "__" + state + ".html";
   }
 
   function render() {
@@ -131,9 +131,6 @@
       memory.canReturn = true;
       go("captcha", "DEFAULT");
     });
-    if (state === "SUCCESS") {
-      toast(doc, "success", "视觉验收状态：未建立真实后台会话。");
-    }
   }
 
   function bindCaptcha(doc, state) {
@@ -167,9 +164,6 @@
         go("captcha", "WRONG", true);
       }, 320);
     });
-    if (state === "SUCCESS") {
-      toast(doc, "success", "视觉验收状态：未签发一次性票据。");
-    }
   }
 
   function refreshCaptcha(doc, field) {
@@ -235,6 +229,7 @@
       memory.returnPage = "self";
       memory.returnState = type === "password" ? "EDIT_PASSWORD" : "SESSION_LIST";
       memory.canReturn = true;
+      memory.selfDrawer = type;
       go("captcha", "DEFAULT");
     }));
     doc.body.append(backdrop, drawer);
@@ -273,25 +268,21 @@
 
   function bindSelf(doc, state) {
     style(doc, selfStyle());
+    doc.body.dataset.stateId = state;
+    doc.querySelectorAll(".admin-drawer,.drawer-backdrop").forEach((item) => item.remove());
     const selected = doc.querySelector(".admin-menu-item.active span");
     if (selected) selected.textContent = "账号与安全";
     const content = doc.querySelector(".admin-body");
     if (!content) return;
     content.innerHTML = selfMarkup();
     content.querySelectorAll(".hhy-action").forEach((item) => item.addEventListener("click", () => {
-      go("self", item.dataset.action === "password" ? "EDIT_PASSWORD" : "SESSION_LIST");
+      const action = item.dataset.action;
+      memory.selfDrawer = action === "password" ? "password" : "sessions";
+      go("self", action === "password" ? "EDIT_PASSWORD" : "SESSION_LIST");
     }));
     bindSessionFilters(doc);
-    if (state === "EDIT_PASSWORD") openDrawer(doc, "password");
-    if (state === "SESSION_LIST") openDrawer(doc, "sessions");
-    if (state === "SUBMITTING") toast(doc, "", "正在准备安全验证…");
-    if (state === "SUCCESS") toast(doc, "success", "视觉验收状态：未修改任何账号数据。");
-    if (state === "ERROR") {
-      const warning = doc.createElement("div");
-      warning.className = "hhy-alert";
-      warning.textContent = "账号安全服务尚未接入，未执行密码修改或会话退出操作。";
-      content.prepend(warning);
-    }
+    if (state === "EDIT_PASSWORD" && memory.selfDrawer === "password") openDrawer(doc, "password");
+    if (state === "SESSION_LIST" && memory.selfDrawer === "sessions") openDrawer(doc, "sessions");
   }
 
   window.addEventListener("popstate", render);
