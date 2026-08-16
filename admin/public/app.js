@@ -131,14 +131,9 @@
       memory.canReturn = true;
       go("captcha", "DEFAULT");
     });
-    const feedback = {
-      SUBMITTING: ["", "正在准备安全验证…"],
-      LOGIN_FAILED: ["error", "认证服务尚未接入，未建立后台会话。"],
-      RATE_LIMITED: ["warn", "操作过于频繁，请稍后再试。"],
-      ACCOUNT_LOCKED: ["warn", "账号当前不可用，请联系安全管理员。"],
-      SUCCESS: ["success", "视觉验收状态：未建立真实后台会话。"]
-    };
-    if (feedback[state]) toast(doc, feedback[state][0], feedback[state][1]);
+    if (state === "SUCCESS") {
+      toast(doc, "success", "视觉验收状态：未建立真实后台会话。");
+    }
   }
 
   function bindCaptcha(doc, state) {
@@ -172,15 +167,9 @@
         go("captcha", "WRONG", true);
       }, 320);
     });
-    const feedback = {
-      LOADING: ["", "正在获取一次性验证码…"],
-      VERIFYING: ["", "正在核验，未签发任何会话。"],
-      WRONG: ["error", "验证码输入有误或认证服务不可用，请重新发起。"],
-      EXPIRED: ["warn", "本次安全验证已过期，请重新发起。"],
-      RATE_LIMITED: ["warn", "验证请求过于频繁，请稍后再试。"],
-      SUCCESS: ["success", "视觉验收状态：未签发一次性票据。"]
-    };
-    if (feedback[state]) toast(doc, feedback[state][0], feedback[state][1]);
+    if (state === "SUCCESS") {
+      toast(doc, "success", "视觉验收状态：未签发一次性票据。");
+    }
   }
 
   function refreshCaptcha(doc, field) {
