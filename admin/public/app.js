@@ -281,8 +281,8 @@
       go("self", action === "password" ? "EDIT_PASSWORD" : "SESSION_LIST");
     }));
     bindSessionFilters(doc);
-    if (state === "EDIT_PASSWORD" && memory.selfDrawer === "password") openDrawer(doc, "password");
-    if (state === "SESSION_LIST" && memory.selfDrawer === "sessions") openDrawer(doc, "sessions");
+    if (state === "EDIT_PASSWORD") openDrawer(doc, "password");
+    if (state === "SESSION_LIST") openDrawer(doc, "sessions");
   }
 
   window.addEventListener("popstate", render);
