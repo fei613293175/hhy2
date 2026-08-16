@@ -13,9 +13,9 @@ public final class MainActivity extends Activity implements SystemScreenView.Act
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        configureEdgeToEdge();
         screen = new SystemScreenView(this, this);
         setContentView(screen);
+        configureEdgeToEdge();
 
         String requestedState = BuildConfig.DEBUG
                 ? getIntent().getStringExtra("hhy.debug.screen")
@@ -32,8 +32,8 @@ public final class MainActivity extends Activity implements SystemScreenView.Act
         window.setNavigationBarColor(android.graphics.Color.TRANSPARENT);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false);
-            if (window.getInsetsController() != null) {
-                window.getInsetsController().setSystemBarsAppearance(0,
+            if (window.getDecorView().getWindowInsetsController() != null) {
+                window.getDecorView().getWindowInsetsController().setSystemBarsAppearance(0,
                         android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
                                 | android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS);
             }
