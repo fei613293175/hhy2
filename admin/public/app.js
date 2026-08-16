@@ -14,6 +14,7 @@
     captchaCode: "7K4M",
     returnPage: "auth",
     returnState: "DEFAULT",
+    canReturn: false,
     passwordFields: { current: "", next: "", confirm: "" }
   };
 
@@ -127,6 +128,7 @@
     if (login) login.addEventListener("click", () => {
       memory.returnPage = "auth";
       memory.returnState = "DEFAULT";
+      memory.canReturn = true;
       go("captcha", "DEFAULT");
     });
     const feedback = {
@@ -196,7 +198,12 @@
 
   function returnFromCaptcha() {
     memory.captcha = "";
-    go(memory.returnPage, memory.returnState);
+    if (memory.canReturn) {
+      memory.canReturn = false;
+      window.history.back();
+      return;
+    }
+    go(memory.returnPage, memory.returnState, true);
   }
 
   function asset(name) {
@@ -240,6 +247,7 @@
     drawer.querySelectorAll(".hhy-protected").forEach((item) => item.addEventListener("click", () => {
       memory.returnPage = "self";
       memory.returnState = type === "password" ? "EDIT_PASSWORD" : "SESSION_LIST";
+      memory.canReturn = true;
       go("captcha", "DEFAULT");
     }));
     doc.body.append(backdrop, drawer);
