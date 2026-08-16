@@ -1,0 +1,26 @@
+:root {
+  color: #13203a;
+  background: #f3f6fa;
+  font-family: "Noto Sans CJK SC", "Noto Sans SC", Inter, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #app {
+  width: 100%;
+  min-width: 1280px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body { overflow: hidden; }
+
+.reference-frame {
+  display: block;
+  width: 100vw;
+  min-width: 1280px;
+  height: 100vh;
+  min-height: 720px;
+  border: 0;
+  background: #f3f6fa;
+}
