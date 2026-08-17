@@ -26,3 +26,5 @@ curl -fsS https://hhy-api.orbexa.cc/health/ready
 ```
 
 P00 不包含真实登录、实名、支付或提现；这些属于 R01/R05/R08，不能用静态成功页替代。Android 壳已有改动时，必须在空闲真实 Android 设备连接后，安装 APK 并完成逐页截图、交互、崩溃/ANR/logcat 检查；当前不可用的真机不能用模拟器替代。
+
+P00 容器的项目名固定为 `hhy-p00`，所有容器端口仅绑定 `127.0.0.1`。外部访问只能经过 `hhy-*.orbexa.cc` 的 Nginx TLS 回源，不复用或覆盖 `*-hhypro.orbexa.cc` 的既有项目站点。

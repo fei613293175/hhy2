@@ -11,10 +11,10 @@ android {
         applicationId 'com.hehuoyun.pro'
         minSdk 26
         targetSdk 36
-        versionCode 1
-        versionName '3.1.0'
+        versionCode 400100
+        versionName '4.1.0-P00'
 
-        buildConfigField 'String', 'API_BASE_URL', '""'
+        buildConfigField 'String', 'API_BASE_URL', '"https://hhy-api.orbexa.cc"'
     }
 
     buildFeatures {
