@@ -249,7 +249,7 @@ func (s *server) issueSession(ctx context.Context, candidate string) (string, er
 	if candidate != "" && s.sessionExists(ctx, candidate) { return candidate, nil }
 	session := randomToken(24)
 	if s.redis == nil {
-		s.store.Lock(); s.store.sessions[session] = time.Now().Add(captchaSessionTTL); s.gcLocked(); s.store.Unlock()
+		s.store.Lock(); s.store.sessions[session] = time.Now().Add(captchaSessionTTL); s.store.gcLocked(); s.store.Unlock()
 		return session, nil
 	}
 	return session, s.redis.Set(ctx, sessionRedisKey(session), "1", captchaSessionTTL).Err()
@@ -286,7 +286,7 @@ func (s *server) saveChallenge(ctx context.Context, challenge *captchaChallenge)
 		s.store.Lock()
 		for id, existing := range s.store.challenges { if existing.Session == challenge.Session && existing.Purpose == challenge.Purpose { delete(s.store.challenges, id) } }
 		s.store.challenges[challenge.ID] = challenge
-		s.gcLocked()
+		s.store.gcLocked()
 		s.store.Unlock()
 		return nil
 	}
