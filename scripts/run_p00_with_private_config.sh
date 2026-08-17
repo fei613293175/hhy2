@@ -36,9 +36,43 @@ credentials_dir=$(find "$work_dir/master" -type d -path '*PRIVATE_CREDENTIALS/al
 test -n "$private_env"
 test -n "$credentials_dir"
 
-# The private source is only interpreted in this process. Values never enter Git or logs.
-. "$private_env"
-. "$base_env"
+# Never source a private .env file: valid secret values may include characters
+# that a shell would execute. Read only the approved keys as opaque strings.
+read_env_value() {
+  key=$1
+  file=$2
+  value=$(awk -v lookup="$key" 'index($0, lookup "=") == 1 { print substr($0, length(lookup) + 2); exit }' "$file" | tr -d '\r')
+  test -n "$value"
+  printf '%s' "$value"
+}
+
+DATABASE_PASSWORD=$(read_env_value DATABASE_PASSWORD "$base_env")
+CAPTCHA_HMAC_SECRET=$(read_env_value CAPTCHA_HMAC_SECRET "$base_env")
+PUBLIC_API_HOST=$(read_env_value PUBLIC_API_HOST "$base_env")
+PUBLIC_ADMIN_HOST=$(read_env_value PUBLIC_ADMIN_HOST "$base_env")
+PUBLIC_H5_HOST=$(read_env_value PUBLIC_H5_HOST "$base_env")
+STORAGE_PUBLIC_BASE_URL=$(read_env_value STORAGE_PUBLIC_BASE_URL "$base_env")
+STORAGE_BUCKET=$(read_env_value STORAGE_BUCKET "$base_env")
+STORAGE_PROJECT_PREFIX=$(read_env_value STORAGE_PROJECT_PREFIX "$base_env")
+CORS_ORIGIN=$(read_env_value CORS_ORIGIN "$base_env")
+
+R2_S3_API=$(read_env_value R2_S3_API "$private_env")
+R2_ACCESS_KEY_ID=$(read_env_value R2_ACCESS_KEY_ID "$private_env")
+R2_SECRET_ACCESS_KEY=$(read_env_value R2_SECRET_ACCESS_KEY "$private_env")
+SMTP_HOST=$(read_env_value SMTP_HOST "$private_env")
+SMTP_PORT=$(read_env_value SMTP_PORT "$private_env")
+SMTP_FROM_ADDRESS=$(read_env_value SMTP_FROM_ADDRESS "$private_env")
+SMTP_PASSWORD=$(read_env_value SMTP_PASSWORD "$private_env")
+IDENTITY_PROVIDER_HOST=$(read_env_value IDENTITY_PROVIDER_HOST "$private_env")
+IDENTITY_PROVIDER_PATH=$(read_env_value IDENTITY_PROVIDER_PATH "$private_env")
+IDENTITY_PROVIDER_APP_CODE=$(read_env_value IDENTITY_PROVIDER_APP_CODE "$private_env")
+FUYLINK_BASE_URL=$(read_env_value FUYLINK_BASE_URL "$private_env")
+FUYLINK_MERCHANT_ID=$(read_env_value FUYLINK_MERCHANT_ID "$private_env")
+FUYLINK_MERCHANT_KEY=$(read_env_value FUYLINK_MERCHANT_KEY "$private_env")
+XAPAY_GATEWAY=$(read_env_value XAPAY_GATEWAY "$private_env")
+XAPAY_PID=$(read_env_value XAPAY_PID "$private_env")
+XAPAY_KEY=$(read_env_value XAPAY_KEY "$private_env")
+ALIPAY_PAYOUT_APP_ID=$(read_env_value ALIPAY_PAYOUT_APP_ID "$private_env")
 
 install -d -m 700 "$certificate_dir"
 install -m 600 "$credentials_dir/private.pem" "$certificate_dir/private.pem"
