@@ -1,0 +1,24 @@
+name: p00-baseline
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  contract-and-build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22.x'
+      - name: Validate compose contract
+        run: docker compose config --quiet
+        env:
+          DATABASE_PASSWORD: ci-only-placeholder
+          CAPTCHA_HMAC_SECRET: ci-only-placeholder-ci-only-placeholder-ci-only
+      - name: Go formatting and tests
+        working-directory: backend
+        run: |
+          test -z "$(gofmt -l cmd)"
+          go test ./...

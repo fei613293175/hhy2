@@ -171,7 +171,7 @@ public final class SystemScreenView extends View {
             drawText(canvas, "网络连接异常，保留当前内容并支持重试", 56, 545, 13.4f, Color.WHITE, Typeface.NORMAL);
             drawOutlineButton(canvas, 100, 570, 260, 620, "重新连接", Color.WHITE, PRIMARY_800);
         }
-        drawCenteredText(canvas, "安全连接  ·  Cloudflare R2  ·  合伙云 V3.1", 765, 10, Color.argb(150, 218, 230, 255), Typeface.NORMAL);
+        drawCenteredText(canvas, "安全连接  ·  对象存储  ·  合伙云 Pro", 765, 10, Color.argb(150, 218, 230, 255), Typeface.NORMAL);
     }
 
     private void drawSystemPage(Canvas canvas) {
@@ -230,8 +230,7 @@ public final class SystemScreenView extends View {
                 ? "正在校验更新" : updateState == UpdateState.FORCED
                 ? "需要更新后继续" : "发现新版本";
         drawCenteredText(canvas, heading, 405, 25, Color.rgb(19, 30, 58), Typeface.NORMAL);
-        drawCenteredText(canvas, "V3.1.0  ·  82.6 MB  ·  优化首页信息流、红包倒计时与支", 437, 13, NEUTRAL_500, Typeface.NORMAL);
-        drawCenteredText(canvas, "付稳定性。", 458, 13, NEUTRAL_500, Typeface.NORMAL);
+        drawCenteredText(canvas, "P00 基础工程  ·  正在准备版本元数据与安全校验。", 447, 13, NEUTRAL_500, Typeface.NORMAL);
         drawPrimaryButton(canvas, 31, 492, 329, 542, updateState == UpdateState.READY_INSTALL ? "开始安装" : "立即更新");
         if (updateState != UpdateState.FORCED) {
             drawSecondaryButton(canvas, 31, 554, 329, 604, "稍后提醒");

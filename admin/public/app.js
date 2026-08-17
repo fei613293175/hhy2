@@ -11,7 +11,10 @@
     account: "admin@example.com",
     password: "",
     captcha: "",
-    captchaCode: "7K4M",
+    captchaCode: "",
+    captchaChallengeId: "",
+    captchaSession: "",
+    captchaImage: "",
     returnPage: "auth",
     returnState: "DEFAULT",
     canReturn: false,
@@ -146,7 +149,7 @@
       name: "captcha",
       value: memory.captcha,
       placeholder: "输入图中字符",
-      maxLength: 4,
+      maxLength: 5,
       autocomplete: "off"
     });
     if (field) {
@@ -158,31 +161,91 @@
     const close = replaceCloseIcon(doc);
     if (close) close.addEventListener("click", returnFromCaptcha);
     const refresh = button(doc, "换一张");
-    if (refresh) refresh.addEventListener("click", () => refreshCaptcha(doc, field));
+    if (refresh) refresh.addEventListener("click", () => requestCaptcha(doc, field, refresh));
     const verify = button(doc, "完成验证");
     if (verify) verify.addEventListener("click", () => {
       if (!field || !field.value.trim()) {
         go("captcha", "WRONG");
         return;
       }
-      go("captcha", "VERIFYING");
-      window.setTimeout(() => {
-        memory.captcha = "";
-        go("captcha", "WRONG", true);
-      }, 320);
+      verifyCaptcha(doc, field, verify);
     });
+    if (state === "SUCCESS") {
+      toast(doc, "success", "图形安全验证已通过。管理员账号认证将在 R01 接入真实接口。");
+      return;
+    }
+    requestCaptcha(doc, field, refresh);
   }
 
-  function refreshCaptcha(doc, field) {
-    const codes = ["7K4M", "P9X2", "M6Q8", "A3TZ"];
-    memory.captchaCode = codes[(codes.indexOf(memory.captchaCode) + 1) % codes.length];
-    [...doc.querySelectorAll("div,span")]
-      .filter((item) => item.children.length === 0 && /^(7K4M|P9X2|M6Q8|A3TZ)$/.test(item.textContent.trim()))
-      .forEach((item) => { item.textContent = memory.captchaCode; });
+  function captchaPreview(doc) {
+    return [...doc.querySelectorAll(".modal > div")].find((item) => item.style.height === "120px");
+  }
+
+  async function requestCaptcha(doc, field, refresh) {
+    if (refresh) refresh.disabled = true;
+    try {
+      const response = await fetch("/api/v1/security/captcha/challenges", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
+        body: JSON.stringify({ purpose: "admin_login", anonymous_session_token: memory.captchaSession || undefined, target: memory.account || undefined })
+      });
+      if (!response.ok) throw new Error("challenge request failed");
+      const payload = await response.json();
+      memory.captchaChallengeId = payload.challenge_id;
+      memory.captchaSession = payload.anonymous_session_token;
+      memory.captchaImage = payload.image_base64;
+      const preview = captchaPreview(doc);
+      if (preview) {
+        preview.replaceChildren();
+        const image = doc.createElement("img");
+        image.src = memory.captchaImage;
+        image.alt = "图形安全验证码";
+        image.width = 160;
+        image.height = 56;
+        image.style.cssText = "display:block;width:160px;height:56px;margin:32px auto;object-fit:contain";
+        preview.append(image);
+      }
+    } catch (_) {
+      memory.captchaChallengeId = "";
+      toast(doc, "error", "安全验证服务暂不可用，请稍后重试。");
+    } finally {
+      if (refresh) refresh.disabled = false;
+    }
     memory.captcha = "";
     if (field) {
       field.value = "";
       field.focus();
+    }
+  }
+
+  async function verifyCaptcha(doc, field, verify) {
+    if (!memory.captchaChallengeId || !memory.captchaSession) {
+      toast(doc, "error", "验证码已失效，请换一张后重试。");
+      return;
+    }
+    if (verify) verify.disabled = true;
+    try {
+      const response = await fetch("/api/v1/security/captcha/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
+        body: JSON.stringify({ challenge_id: memory.captchaChallengeId, answer: field.value, purpose: "admin_login", anonymous_session_token: memory.captchaSession, target: memory.account || undefined })
+      });
+      if (response.ok) {
+        memory.captcha = "";
+        memory.captchaChallengeId = "";
+        go("captcha", "SUCCESS");
+        return;
+      }
+      const payload = await response.json().catch(() => ({}));
+      if (payload.error === "captcha_rate_limited") go("captcha", "RATE_LIMITED");
+      else if (payload.error === "captcha_expired") go("captcha", "EXPIRED");
+      else go("captcha", "WRONG");
+    } catch (_) {
+      toast(doc, "error", "无法连接安全验证服务。");
+    } finally {
+      if (verify) verify.disabled = false;
     }
   }
 

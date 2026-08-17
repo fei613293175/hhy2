@@ -1,0 +1,31 @@
+# P00 maps integrations to server-only variables. This file intentionally has no values.
+storage:
+  public_base_url: STORAGE_PUBLIC_BASE_URL
+  s3_endpoint: STORAGE_S3_ENDPOINT
+  bucket: STORAGE_BUCKET
+  project_prefix: STORAGE_PROJECT_PREFIX
+  access_key_id: STORAGE_ACCESS_KEY_ID
+  secret_access_key: STORAGE_SECRET_ACCESS_KEY
+smtp:
+  host: SMTP_HOST
+  port: SMTP_PORT
+  username: SMTP_USERNAME
+  password: SMTP_PASSWORD
+identity:
+  endpoint: IDENTITY_PROVIDER_URL
+  app_code: IDENTITY_PROVIDER_APPCODE
+fuylink:
+  base_url: FUYUN_BASE_URL
+  pid: FUYUN_PID
+  key: FUYUN_KEY
+xapay:
+  gateway_url: XAPAY_GATEWAY_URL
+  pid: XAPAY_PID
+  key: XAPAY_KEY
+payout:
+  app_id: ALIPAY_PAYOUT_APP_ID
+  private_key: ALIPAY_PAYOUT_PRIVATE_KEY
+  certificate_path: ALIPAY_PAYOUT_CERTIFICATE_PATH
+policy:
+  secrets_server_only: true
+  public_client_exposure: forbidden

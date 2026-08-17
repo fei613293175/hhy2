@@ -1,0 +1,76 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: hhy
+      POSTGRES_USER: hhy
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?set DATABASE_PASSWORD in server env}
+    volumes:
+      - hhy-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hhy -d hhy"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - hhy-redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  migrate:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgres://hhy:${DATABASE_PASSWORD:?set DATABASE_PASSWORD in server env}@postgres:5432/hhy?sslmode=disable
+    depends_on:
+      postgres: {condition: service_healthy}
+    entrypoint: ["/usr/local/bin/hhy-migrate"]
+  api:
+    build: ./backend
+    environment:
+      HTTP_ADDR: :8080
+      CAPTCHA_HMAC_SECRET: ${CAPTCHA_HMAC_SECRET:?generate CAPTCHA_HMAC_SECRET on server}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_URL: postgres://hhy:${DATABASE_PASSWORD:?set DATABASE_PASSWORD in server env}@postgres:5432/hhy?sslmode=disable
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      PUBLIC_API_HOST: ${PUBLIC_API_HOST:-hhy-api.orbexa.cc}
+      PUBLIC_ADMIN_HOST: ${PUBLIC_ADMIN_HOST:-hhy-admin.orbexa.cc}
+      PUBLIC_H5_HOST: ${PUBLIC_H5_HOST:-hhy-h5.orbexa.cc}
+      STORAGE_PUBLIC_BASE_URL: ${STORAGE_PUBLIC_BASE_URL:-https://oss.orbexa.cc}
+      STORAGE_BUCKET: ${STORAGE_BUCKET:-fuylink}
+      STORAGE_PROJECT_PREFIX: ${STORAGE_PROJECT_PREFIX:-hhy/prod/}
+      CORS_ORIGIN: ${CORS_ORIGIN:-https://hhy-admin.orbexa.cc}
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/health/ready >/dev/null"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    ports: ["127.0.0.1:${P00_API_PORT:-18192}:8080"]
+  worker:
+    build: ./backend
+    entrypoint: ["/usr/local/bin/hhy-worker"]
+    environment:
+      WORKER_POLL_INTERVAL: 5s
+      DATABASE_URL: postgres://hhy:${DATABASE_PASSWORD:?set DATABASE_PASSWORD in server env}@postgres:5432/hhy?sslmode=disable
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  admin:
+    build: ./admin
+    ports: ["127.0.0.1:${P00_ADMIN_PORT:-18190}:8080"]
+    depends_on: [api]
+  h5:
+    build: ./h5
+    ports: ["127.0.0.1:${P00_H5_PORT:-18191}:8080"]
+    depends_on: [api]
+volumes:
+  hhy-postgres:
+  hhy-redis:
