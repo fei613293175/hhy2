@@ -24,8 +24,10 @@ xapay:
   key: XAPAY_KEY
 payout:
   app_id: ALIPAY_PAYOUT_APP_ID
-  private_key: ALIPAY_PAYOUT_PRIVATE_KEY
-  certificate_path: ALIPAY_PAYOUT_CERTIFICATE_PATH
+  private_key_path: ALIPAY_PAYOUT_PRIVATE_KEY_PATH
+  app_certificate_path: ALIPAY_PAYOUT_APP_CERT_PATH
+  alipay_certificate_path: ALIPAY_PAYOUT_ALIPAY_CERT_PATH
+  root_certificate_path: ALIPAY_PAYOUT_ROOT_CERT_PATH
 policy:
   secrets_server_only: true
   public_client_exposure: forbidden

@@ -64,8 +64,12 @@ services:
       XAPAY_PID: ${XAPAY_PID:-}
       XAPAY_KEY: ${XAPAY_KEY:-}
       ALIPAY_PAYOUT_APP_ID: ${ALIPAY_PAYOUT_APP_ID:-}
-      ALIPAY_PAYOUT_PRIVATE_KEY: ${ALIPAY_PAYOUT_PRIVATE_KEY:-}
-      ALIPAY_PAYOUT_CERTIFICATE_PATH: ${ALIPAY_PAYOUT_CERTIFICATE_PATH:-}
+      ALIPAY_PAYOUT_PRIVATE_KEY_PATH: ${ALIPAY_PAYOUT_PRIVATE_KEY_PATH:-}
+      ALIPAY_PAYOUT_APP_CERT_PATH: ${ALIPAY_PAYOUT_APP_CERT_PATH:-}
+      ALIPAY_PAYOUT_ALIPAY_CERT_PATH: ${ALIPAY_PAYOUT_ALIPAY_CERT_PATH:-}
+      ALIPAY_PAYOUT_ROOT_CERT_PATH: ${ALIPAY_PAYOUT_ROOT_CERT_PATH:-}
+    volumes:
+      - ${PAYOUT_CERTS_HOST_DIR:-/run/empty}:/run/secrets/alipay-payout:ro
     depends_on:
       migrate: {condition: service_completed_successfully}
       redis: {condition: service_healthy}

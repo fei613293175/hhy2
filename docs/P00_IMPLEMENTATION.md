@@ -9,7 +9,7 @@ P00 以 V4.1.0 的 `READY_FOR_P00_DIRECT_DEVELOPMENT` 为输入，交付可运�
 - `/api/v1/p00/preflight`：只返回 R2 兼容对象存储、SMTP、实名、富运、XApay、出款证书映射是否已配置，绝不返回变量值或密钥。
 - 自研图形验证码创建/验证：服务端会话、128-bit 随机挑战、PNG Base64、HMAC-SHA256、120 秒挑战、3 次错误上限、180 秒一次性票据。
 - 迁移包含 P00 所需的后台账号/会话、验证码、配置和 Outbox 基础表；版本迁移以 PostgreSQL advisory lock、单事务和 `schema_migrations` 记录执行，已写入的配置不会被重启覆盖。
-- `configs/integrations.example.yaml` 映射 R2 兼容对象存储、SMTP、实名、富运、XApay 和支付宝证书出款所需的服务器变量；示例不含任何密钥、证书或实际值。
+- `configs/integrations.example.yaml` 映射 R2 兼容对象存储、SMTP、实名、富运、XApay 和支付宝证书出款所需的服务器变量；出款私钥和证书始终只读挂载为文件路径，示例不含任何密钥、证书或实际值。
 - Admin 保留 D02 P00 三页 19 状态视觉实现；H5 具备独立可运行壳；Android 使用 Kotlin + Compose Activity 承载已有的精确 360×800 D02 启动状态视图。
 
 ## 现网对象存储事实覆盖

@@ -203,7 +203,7 @@ func (s *server) preflight(w http.ResponseWriter, _ *http.Request) {
 		"identity": integrationState("IDENTITY_PROVIDER_URL", "IDENTITY_PROVIDER_APPCODE"),
 		"fuylink":  integrationState("FUYUN_BASE_URL", "FUYUN_PID", "FUYUN_KEY"),
 		"xapay":    integrationState("XAPAY_GATEWAY_URL", "XAPAY_PID", "XAPAY_KEY"),
-		"payout":   integrationState("ALIPAY_PAYOUT_APP_ID", "ALIPAY_PAYOUT_PRIVATE_KEY", "ALIPAY_PAYOUT_CERTIFICATE_PATH"),
+		"payout":   payoutIntegrationState(),
 	}
 	jsonResponse(w, http.StatusOK, map[string]interface{}{"release": "P00", "integrations": checks, "values_exposed": false})
 }
@@ -211,6 +211,20 @@ func (s *server) preflight(w http.ResponseWriter, _ *http.Request) {
 func integrationState(keys ...string) string {
 	for _, key := range keys {
 		if strings.TrimSpace(os.Getenv(key)) == "" {
+			return "not_configured"
+		}
+	}
+	return "configured"
+}
+
+func payoutIntegrationState() string {
+	if integrationState("ALIPAY_PAYOUT_APP_ID", "ALIPAY_PAYOUT_PRIVATE_KEY_PATH", "ALIPAY_PAYOUT_APP_CERT_PATH", "ALIPAY_PAYOUT_ALIPAY_CERT_PATH", "ALIPAY_PAYOUT_ROOT_CERT_PATH") != "configured" {
+		return "not_configured"
+	}
+	for _, key := range []string{"ALIPAY_PAYOUT_PRIVATE_KEY_PATH", "ALIPAY_PAYOUT_APP_CERT_PATH", "ALIPAY_PAYOUT_ALIPAY_CERT_PATH", "ALIPAY_PAYOUT_ROOT_CERT_PATH"} {
+		path := strings.TrimSpace(os.Getenv(key))
+		info, err := os.Stat(path)
+		if err != nil || info.IsDir() {
 			return "not_configured"
 		}
 	}
