@@ -79,6 +79,10 @@ install -m 600 "$credentials_dir/private.pem" "$certificate_dir/private.pem"
 install -m 600 "$credentials_dir/app-cert.pem" "$certificate_dir/app-cert.pem"
 install -m 600 "$credentials_dir/alipay-cert.pem" "$certificate_dir/alipay-cert.pem"
 install -m 600 "$credentials_dir/root-cert.pem" "$certificate_dir/root-cert.pem"
+# The API image runs as uid 10001. Grant that service account access to the
+# read-only bind mount without widening the host directory to other users.
+chown -R 10001:10001 "$certificate_dir"
+chmod 700 "$certificate_dir"
 
 STORAGE_S3_ENDPOINT=$R2_S3_API
 STORAGE_ACCESS_KEY_ID=$R2_ACCESS_KEY_ID
